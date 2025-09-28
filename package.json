@@ -1,0 +1,16 @@
+{
+  "name": "com.jofo.adofairunner",
+  "version": "1.0.0",
+  "displayName": "ADOFAI Runner",
+  "description": "A Unity Editor extension that quick runs ADOFAI during development with Thunderkit.",
+  "unity": "2022.3",
+  "author": {
+    "name": "Jofo",
+    "url": "https://github.com/JofoDuh/ADOFAIRunner"
+  },
+
+  "dependencies": {
+    "com.unity.scriptablebuildpipeline": "1.16.1",
+    "com.passivepicasso.thunderkit": "9.1.1"
+  }
+}

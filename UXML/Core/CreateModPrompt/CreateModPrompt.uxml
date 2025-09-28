@@ -1,0 +1,29 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="True">
+    <Style src="project://database/Assets/Plugins/Jofo&apos;s%20APIs/ADOFAIModdingHelper/UXML/Core/CreateModPrompt/CreateModPrompt.uss?fileID=7433441132597879392&amp;guid=0655706c64b4ba7478f2cf0b953eb37d&amp;type=3#CreateModPrompt" />
+    <ui:VisualElement name="Header" class="CMP-Header">
+        <ui:Label tabindex="-1" text="Create Mod Template" name="HeaderText" />
+    </ui:VisualElement>
+    <ui:ScrollView focusable="true" name="UMMScrollView" class="CMP-ScrollView" style="flex-grow: 1; padding-top: 4px; padding-right: 4px; padding-bottom: 4px; padding-left: 4px;">
+        <ui:VisualElement name="Properties" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0.2); margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; flex-direction: column;">
+            <ui:VisualElement name="modNameVE" class="CMP-Field">
+                <ui:Label text="Mod Name" name="modName" class="CMP-Field-label" style="width: 110px;" />
+                <ui:VisualElement name="modNameInputVE" class="horizontal grow m0 CMP-Field-input" style="flex-grow: 0; width: 250px;">
+                    <ui:TextField binding-path="ModName" name="modNameTF" class="grow m0" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+            <ui:VisualElement name="modAuthorVE" class="CMP-Field">
+                <ui:Label text="Mod Author" name="modAuthor" class="CMP-Field-label" style="width: 110px;" />
+                <ui:VisualElement name="modAuthorInputVE" class="horizontal grow m0 CMP-Field-input" style="flex-grow: 0; width: 250px;">
+                    <ui:TextField binding-path="ModAuthor" name="modAuthorTF" class="grow m0" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+            <ui:VisualElement name="modVersionVE" class="CMP-Field">
+                <ui:Label text="Mod Version" name="modVersion" class="CMP-Field-label" />
+                <ui:VisualElement name="modVersionInputVE" class="horizontal grow m0 CMP-Field-input" style="flex-grow: 0; width: 100px;">
+                    <ui:TextField binding-path="ModVersion" name="modVersionTF" class="grow m0" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+        </ui:VisualElement>
+    </ui:ScrollView>
+    <ui:Button name="cmp-create" text="Create" class="CMP-createButton" />
+</ui:UXML>
