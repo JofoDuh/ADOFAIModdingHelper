@@ -1,0 +1,63 @@
+.ARSettingHeader {
+    background-color: rgba(0, 0, 0, 0.2);
+    -unity-text-align: middle-center;
+    font-size: 15px;
+}
+
+.ARSettingListView {
+    background-color: rgba(0, 0, 0, 0.2);
+    margin-top: 4px;
+    margin-right: 4px;
+    margin-bottom: 4px;
+    margin-left: 4px;
+    padding-top: 4px;
+    padding-right: 4px;
+    padding-bottom: 4px;
+    padding-left: 4px;
+}
+
+.ARSettingListView .unity-label {
+    -unity-text-align: middle-left;
+    font-size: 15px;
+    color: rgb(255, 255, 255);
+}
+
+.ARSettingListView .unity-label:hover {
+    -unity-text-align: middle-left;
+    -unity-text-outline-color: rgba(0, 0, 0, 0);
+    background-color: rgba(150, 229, 255, 0);
+    color: rgb(255, 255, 255);
+    font-size: 15px;
+    border-left-color: rgb(150, 229, 255);
+    border-right-color: rgb(150, 229, 255);
+    border-top-color: rgb(150, 229, 255);
+    border-bottom-color: rgb(150, 229, 255);
+    border-top-width: 1px;
+    border-right-width: 1px;
+    border-bottom-width: 1px;
+    border-left-width: 1px;
+}
+
+.ARSettingListView .unity-label:selected {
+    -unity-text-align: middle-left;
+    -unity-text-outline-color: rgba(0, 0, 0, 0);
+    background-color: rgba(150, 229, 255, 0.5);
+    color: rgb(255, 255, 255);
+    font-size: 15px;
+}
+
+.ARSettingListView .unity-label:hover:selected {
+    -unity-text-align: middle-left;
+    -unity-text-outline-color: rgba(0, 0, 0, 0);
+    background-color: rgba(150, 229, 255, 0.5);
+    border-left-color: rgb(150, 229, 255);
+    border-right-color: rgb(150, 229, 255);
+    border-top-color: rgb(150, 229, 255);
+    border-bottom-color: rgb(150, 229, 255);
+    border-top-width: 1px;
+    border-right-width: 1px;
+    border-bottom-width: 1px;
+    border-left-width: 1px;
+    color: rgb(255, 255, 255);
+    font-size: 15px;
+}

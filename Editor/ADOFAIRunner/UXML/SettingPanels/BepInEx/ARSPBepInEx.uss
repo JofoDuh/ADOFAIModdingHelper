@@ -1,0 +1,100 @@
+.AR-standardButton {
+    height: auto;
+    margin-top: 0;
+    margin-right: 4px;
+    margin-bottom: 0;
+    margin-left: 4px;
+    padding-top: 0;
+    padding-right: 4px;
+    padding-bottom: 0;
+    padding-left: 4px;
+    flex-grow: 0;
+    width: 60px;
+}
+
+.AR-Field {
+    flex-direction: row;
+    padding-top: 2px;
+    padding-right: 4px;
+    padding-bottom: 2px;
+    padding-left: 4px;
+    margin-bottom: 4px;
+    margin-top: 4px;
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.AR-Field-label {
+    flex-grow: 0;
+    flex-shrink: 0;
+    margin-right: 8px;
+    width: auto;
+    color: rgb(255, 255, 255);
+    flex-direction: column;
+    margin-left: 0;
+    padding-top: 0;
+    padding-right: 0;
+    padding-bottom: 0;
+    padding-left: 0;
+    margin-bottom: 0;
+    margin-top: 0;
+    font-size: 20px;
+}
+
+.AR-Field-input {
+    flex-grow: 1;
+    flex-direction: row;
+    height: 20px;
+    flex-basis: initial;
+    align-self: center;
+}
+
+.AR-Field-input .unity-base-text-field {
+    flex-grow: 1;
+    margin-top: 0;
+    margin-right: 0;
+    margin-bottom: 0;
+    margin-left: 0;
+    padding-top: 0;
+    padding-right: 0;
+    padding-bottom: 0;
+    padding-left: 0;
+    border-top-width: 0;
+    border-right-width: 0;
+    border-bottom-width: 0;
+    border-left-width: 0;
+    flex-basis: 0;
+}
+
+.AR-Field-input .unity-base-text-field__input {
+    background-color: rgb(255, 255, 255);
+    border-top-width: 1px;
+    border-right-width: 1px;
+    border-bottom-width: 1px;
+    border-left-width: 1px;
+    border-left-color: rgb(149, 149, 149);
+    border-right-color: rgb(149, 149, 149);
+    border-top-color: rgb(149, 149, 149);
+    border-bottom-color: rgb(149, 149, 149);
+    margin-top: 0;
+    margin-right: 0;
+    margin-bottom: 0;
+    margin-left: 0;
+    padding-top: 0;
+    padding-right: 2px;
+    padding-bottom: 0;
+    padding-left: 2px;
+}
+
+.AR-Field-input .unity-base-text-field__input .unity-text-element {
+    color: rgb(0, 0, 0);
+    font-size: 15px;
+    -unity-text-align: middle-left;
+}
+
+.AR-ScrollView {
+}
+
+.AR-ScrollView .unity-scroll-view__content-container {
+    flex-grow: 1;
+}

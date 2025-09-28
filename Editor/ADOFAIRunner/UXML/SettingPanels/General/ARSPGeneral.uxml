@@ -1,0 +1,24 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="True">
+    <Style src="project://database/Assets/Plugins/Jofo&apos;s%20APIs/ADOFAIRunner/UXML/SettingPanels/General/ARSPGeneral.uss?fileID=7433441132597879392&amp;guid=1899b5c1af8d6cb4fb677fcdc12eff76&amp;type=3#ARSPGeneral" />
+    <ui:ScrollView focusable="true" name="UMMScrollView" class="AR-ScrollView" style="flex-grow: 1; padding-top: 4px; padding-right: 4px; padding-bottom: 4px; padding-left: 4px;">
+        <ui:VisualElement name="Header" style="flex-grow: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0;">
+            <ui:Label tabindex="-1" text="General Settings" parse-escape-sequences="true" display-tooltip-when-elided="true" name="HeaderText" style="color: rgb(255, 255, 255); font-size: 25px; background-color: rgba(0, 0, 0, 0.2); -unity-text-align: middle-center; padding-top: 4px; padding-right: 4px; padding-bottom: 4px; padding-left: 4px; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0;" />
+        </ui:VisualElement>
+        <ui:VisualElement name="Spacer" style="flex-grow: 0; height: 4px;" />
+        <ui:VisualElement name="Properties" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0.2); margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; flex-direction: column;">
+            <ui:VisualElement class="AR-Field">
+                <ui:Label text="Thunderkit Export Path" name="ThunderkitExportPath" class="AR-Field-label" />
+                <ui:VisualElement class="horizontal grow m0 AR-Field-input">
+                    <ui:TextField binding-path="ThunderkitOutputPath" name="THUNDERKITEPTF" class="grow m0" />
+                    <ui:Button name="thunderkit-export-browse" text="Browse" class="AR-standardButton" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+            <ui:VisualElement class="AR-Field">
+                <ui:Toggle label="Include PDB File" binding-path="IncludePDBFile" class="AR-Toggle" />
+            </ui:VisualElement>
+            <ui:VisualElement class="AR-Field">
+                <uie:PropertyField view-data-key="ModsList" binding-path="AvailableMods" label="Mods" class="AR-PropertyField" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+    </ui:ScrollView>
+</ui:UXML>

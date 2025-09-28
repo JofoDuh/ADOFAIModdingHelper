@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 69b8dd49e3d0f0343ad8026fd84fe484
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - m_ViewDataDictionary: {instanceID: 0}
+  - MainPanel: {fileID: 9197481963319205126, guid: f4eda2d6c280487479f6bf138eade2a7, type: 3}
+  - SettingPanelWrapper: {fileID: 9197481963319205126, guid: c52e89710b6d0c04891af51632753c9e, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

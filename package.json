@@ -1,12 +1,12 @@
 {
-  "name": "com.jofo.adofairunner",
+  "name": "com.jofo.adofaimoddinghelper",
   "version": "1.0.0",
-  "displayName": "ADOFAI Runner",
-  "description": "A Unity Editor extension that quick runs ADOFAI during development with Thunderkit.",
+  "displayName": "ADOFAI Modding Helper",
+  "description": "A Unity Editor package that streamline some stuff during ADOFAI mod development with Thunderkit.",
   "unity": "2022.3",
   "author": {
     "name": "Jofo",
-    "url": "https://github.com/JofoDuh/ADOFAIRunner"
+    "url": "https://github.com/JofoDuh/ADOFAIModdingHelper"
   },
 
   "dependencies": {

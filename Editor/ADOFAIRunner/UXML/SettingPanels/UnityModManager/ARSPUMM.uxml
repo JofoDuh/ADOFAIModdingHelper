@@ -1,0 +1,25 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="True">
+    <Style src="project://database/Assets/UXML/ADOFAIRunner/SettingPanels/ARSPUMM.uss?fileID=7433441132597879392&amp;guid=3c9897fd032b753469704f483856cdbf&amp;type=3#ARSPUMM" />
+    <ui:ScrollView focusable="true" name="UMMScrollView" class="AR-ScrollView" style="flex-grow: 1; padding-top: 4px; padding-right: 4px; padding-bottom: 4px; padding-left: 4px;">
+        <ui:VisualElement name="Header" style="flex-grow: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0;">
+            <ui:Label tabindex="-1" text="Unity Mod Manager Settings" parse-escape-sequences="true" display-tooltip-when-elided="true" name="HeaderText" style="color: rgb(255, 255, 255); font-size: 25px; background-color: rgba(0, 0, 0, 0.2); -unity-text-align: middle-center; padding-top: 4px; padding-right: 4px; padding-bottom: 4px; padding-left: 4px; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0;" />
+        </ui:VisualElement>
+        <ui:VisualElement name="Spacer" style="flex-grow: 0; height: 4px;" />
+        <ui:VisualElement name="Properties" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0.2); margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; flex-direction: column;">
+            <ui:VisualElement class="AR-Field">
+                <ui:Label text="UMM Mod Path" class="AR-Field-label" />
+                <ui:VisualElement class="horizontal grow m0 AR-Field-input">
+                    <ui:TextField binding-path="UMMModFolderPath" name="UMMMODPATHTF" class="grow m0" />
+                    <ui:Button name="umm-mod-browse" text="Browse" class="AR-standardButton" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+            <ui:VisualElement class="AR-Field">
+                <ui:Label text="UMM Executable Path" class="AR-Field-label" />
+                <ui:VisualElement class="horizontal grow m0 AR-Field-input" style="flex-direction: row;">
+                    <ui:TextField binding-path="UnityModManagerExePath" name="UMMEXETF" class="grow m0" style="flex-grow: 1;" />
+                    <ui:Button name="umm-exe-browse" text="Browse" class="AR-standardButton" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+        </ui:VisualElement>
+    </ui:ScrollView>
+</ui:UXML>

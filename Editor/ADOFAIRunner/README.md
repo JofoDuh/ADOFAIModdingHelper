@@ -1,12 +1,5 @@
-# ADOFAI Modding Helper
-Unity package made for ADOFAI mod developers working alongside Thunderkit. This package streamline some process in mod development. **Make sure to read the instructions to properly use this package!**
-
-The package "ADOFAI Runner" has also been merged with this package, so make sure to remove "ADOFAI Runner" package before adding this.
-***
-## Features
-* **Mod Info** - A Unity asset that is used to create the mod Info
-    - Currently supported mod managers: BepInEx & UnityModManager.
-* **Some extra stuff regarding ThunderKit** - This package comes with an option to create a preset Pipeline + Manifest of ThunderKit, that I normally use for my mods.
+# WARNING
+This package is deprecated and is no longer updated, since it has been intergrated into the package "ADOFAI Modding Helper"!
 ***
 # ADOFAI Runner
 Unity Editor extension for ADOFAI mod developers working alongside Thunderkit.
