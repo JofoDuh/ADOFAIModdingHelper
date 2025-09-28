@@ -54,7 +54,7 @@ namespace ADOFAIRunner.Core.Windows
                 switch (selectedItem)
                 {
                     case "General":
-                        var generalPanelTemplate = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>($"{Constants.ADOFAIRunnerRootPath}/UXML/SettingPanels/General/ARSPGeneral.uxml");
+                        var generalPanelTemplate = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>($"{Constants.ADOFAIRunnerRootPath}/Editor/ADOFAIRunner/UXML/SettingPanels/General/ARSPGeneral.uxml");
                         var generalPanelRoot = generalPanelTemplate.CloneTree();
                         _settingPanelContainer.Add(generalPanelRoot);
                         generalPanelRoot.Bind(new SerializedObject(_adofaiSetting));
@@ -76,7 +76,7 @@ namespace ADOFAIRunner.Core.Windows
 
                         break;
                     case "Unity Mod Manager":
-                        var ummPanelTemplate = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>($"{Constants.ADOFAIRunnerRootPath}/UXML/SettingPanels/UnityModManager/ARSPUMM.uxml");
+                        var ummPanelTemplate = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>($"{Constants.ADOFAIRunnerRootPath}/Editor/ADOFAIRunner/UXML/SettingPanels/UnityModManager/ARSPUMM.uxml");
                         var ummPanelRoot = ummPanelTemplate.CloneTree();
                         _settingPanelContainer.Add(ummPanelRoot);                
                         ummPanelRoot.Bind(new SerializedObject(_adofaiSetting));
@@ -109,7 +109,7 @@ namespace ADOFAIRunner.Core.Windows
                         };
                         break;
                     case "BepInEx":
-                        var bipPanelTemplate = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>($"{Constants.ADOFAIRunnerRootPath}/UXML/SettingPanels/BepInEx/ARSPBepInEx.uxml");
+                        var bipPanelTemplate = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>($"{Constants.ADOFAIRunnerRootPath}/Editor/ADOFAIRunner/UXML/SettingPanels/BepInEx/ARSPBepInEx.uxml");
                         var bipPanelRoot = bipPanelTemplate.CloneTree();
                         _settingPanelContainer.Add(bipPanelRoot);
                         bipPanelRoot.Bind(new SerializedObject(_adofaiSetting));

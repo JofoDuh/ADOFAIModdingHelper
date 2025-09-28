@@ -14,7 +14,7 @@ namespace ADOFAIRunner.Common
 
         static Constants()
         {
-            string[] guids = AssetDatabase.FindAssets("ADOFAIRunner t:AssemblyDefinitionAsset");
+            string[] guids = AssetDatabase.FindAssets("ADOFAIModdingHelper t:AssemblyDefinitionAsset");
             if (guids.Length > 0)
             {
                 string asmdefPath = AssetDatabase.GUIDToAssetPath(guids[0]);
