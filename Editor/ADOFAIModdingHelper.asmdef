@@ -4,7 +4,8 @@
     "references": [
         "ThunderKit.Core",
         "ThunderKit.Addressable.Tools",
-        "ToolbarExtender.Editor"
+        "ToolbarExtender.Editor",
+        "Unity.EditorCoroutines.Editor"
     ],
     "includePlatforms": [
         "Editor"

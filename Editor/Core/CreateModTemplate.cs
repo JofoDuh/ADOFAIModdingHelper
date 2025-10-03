@@ -40,19 +40,24 @@ namespace ADOFAIModdingHelper.Core
             var modInfo = CreateModInfoAsset(rootFolder, prompt);
 
             // 5. Assets folder
-            string assetPath = SetupAssetSubfolders(rootFolder, prompt);
+            string assetPath = string.Empty;
+            if (prompt.AssetFolder) assetPath = SetupAssetSubfolders(rootFolder, prompt);
 
-            // 6. ThunderKit setup
+            // 6. Scenes folder
+            if (prompt.SceneFolder) EnsureSubFolder(rootFolder, "Scenes");
+
+            // 7. ThunderKit setup
             var tkPath = EnsureSubFolder(rootFolder, "ThunderKit");
             var manifest = CreateThunderKitManifest(tkPath, asmdefAsset, assetPath, prompt);
             var pipeline = CreateThunderKitPipeline(tkPath, manifest, prompt);
 
-            // 7. Scripts
+            // 8. Scripts
             GenerateScripts(rootFolder, prompt);
 
-            // 8. Add mod to ADOFAI Runner 
+            // 9. Add mod to ADOFAI Runner 
             AddModToADOFAIRunner(modInfo, pipeline);
 
+            modInfo.modInfoBIE.BIPModInfoCSPath = Path.Combine(rootFolder, "ModScripts", "Main", "BepInEx", nameof(ModTemplateMain.BepInExModInfo));
             Debug.Log($"Created mod template at {rootFolder}");
             AssetDatabase.SaveAssets();
             AssetDatabase.Refresh();
@@ -83,22 +88,27 @@ namespace ADOFAIModdingHelper.Core
         private static ModInfo CreateModInfoAsset(string rootFolder, CreateModPromptData prompt)
         {
             var modInfo = ScriptableObject.CreateInstance<ModInfo>();
-            modInfo.modInfoUMM = new ModInfoUMM
+            if (prompt.UMMCompatibility)
             {
-                Id = prompt.ModName,
-                DisplayName = prompt.ModName,
-                Author = prompt.ModAuthor,
-                Version = prompt.ModVersion,
-                AssemblyName = $"{prompt.ModName}.dll",
-                EntryMethod = $"{prompt.ModName}.Startup.Load"
-            };
-            modInfo.modInfoBIE = new ModInfoBIE
+                modInfo.modInfoUMM = new ModInfoUMM
+                {
+                    Id = prompt.ModID,
+                    DisplayName = prompt.ModName,
+                    Author = prompt.ModAuthor,
+                    Version = string.IsNullOrEmpty(prompt.ModVersion) ? "1.0.0" : prompt.ModVersion,
+                    AssemblyName = $"{prompt.ModName}.dll",
+                    EntryMethod = $"{prompt.ModName}.Startup.Load"
+                };
+            }
+            else if (prompt.BepInExCompatibility)
             {
-                GUID = $"BepInEx.{prompt.ModName}",
-                PluginName = prompt.ModName,
-                PluginVersion = prompt.ModVersion
-            };
-
+                modInfo.modInfoBIE = new ModInfoBIE
+                {
+                    GUID = $"BepInEx.{prompt.ModID}",
+                    PluginName = prompt.ModName,
+                    PluginVersion = string.IsNullOrEmpty(prompt.ModVersion) ? "1.0.0" : prompt.ModVersion,
+                };
+            }
             string path = AssetDatabase.GenerateUniqueAssetPath(Path.Combine(rootFolder, $"{prompt.ModName}ModInfo.asset"));
             AssetDatabase.CreateAsset(modInfo, path);
             return modInfo;
@@ -106,14 +116,44 @@ namespace ADOFAIModdingHelper.Core
 
         private static string SetupAssetSubfolders(string root, CreateModPromptData prompt)
         {
+            prompt.AdditionalAssetFolders ??= new List<string>();
+
             string assetPath = EnsureSubFolder(root, "Assets");
-            if (prompt.AudiosFolder) EnsureSubFolder(assetPath, "Audios");
-            if (prompt.Texture2dFolder) EnsureSubFolder(assetPath, "Textures2D");
-            if (prompt.PrefabFolder) EnsureSubFolder(assetPath, "Prefabs");
-            if (prompt.ScriptsFolder) EnsureSubFolder(assetPath, "Scripts");
-            if (prompt.FontsFolder) EnsureSubFolder(assetPath, "Fonts");
-            if (prompt.MaterialsFolder) EnsureSubFolder(assetPath, "Materials");
-            if (prompt.ShadersFolder) EnsureSubFolder(assetPath, "Shaders");
+
+            var folders = new List<string>();
+            if (prompt.AudiosFolder) folders.Add("Audios");
+            if (prompt.Texture2dFolder) folders.Add("Textures2D");
+            if (prompt.PrefabsFolder) folders.Add("Prefabs");
+            if (prompt.ScriptsFolder) folders.Add("Scripts");
+            if (prompt.FontsFolder) folders.Add("Fonts");
+            if (prompt.MaterialsFolder) folders.Add("Materials");
+            if (prompt.ShadersFolder) folders.Add("Shaders");
+
+            foreach (var folder in folders)
+            {
+                prompt.AdditionalAssetFolders.Add(folder);
+            }
+
+            var seen = new Dictionary<string, int>();
+            for (int i = 0; i < prompt.AdditionalAssetFolders.Count; i++)
+            {
+                string folder = prompt.AdditionalAssetFolders[i];
+                if (string.IsNullOrEmpty(folder)) continue;
+
+                if (seen.TryGetValue(folder, out int count))
+                {
+                    count++;
+                    prompt.AdditionalAssetFolders[i] = $"{folder}_{count}";
+                    seen[folder] = count;
+                }
+                else
+                {
+                    seen[folder] = 0;
+                }
+
+                EnsureSubFolder(assetPath, prompt.AdditionalAssetFolders[i]);
+            }
+
             return assetPath;
         }
 
@@ -135,8 +175,11 @@ namespace ADOFAIModdingHelper.Core
             var assetBundleDef = new AssetBundleDefinition
             {
                 assetBundleName = $"{prompt.ModName}_assets.bundle",
-                assets = new UnityEngine.Object[] { AssetDatabase.LoadAssetAtPath(assetPath, typeof(UnityEngine.Object)) }
             };
+            if (!string.IsNullOrEmpty(assetPath))
+            {
+                assetBundleDef.assets = new UnityEngine.Object[] { AssetDatabase.LoadAssetAtPath(assetPath, typeof(UnityEngine.Object)) };
+            }
             var bundleDatum = ModManifestUtils.GetManifestDatum<AssetBundleDefinitions>(manifest);
             var bundles = bundleDatum.assetBundles?.ToList() ?? new List<AssetBundleDefinition>();
             bundles.Add(assetBundleDef);
@@ -168,16 +211,22 @@ namespace ADOFAIModdingHelper.Core
 
             // Main
             string mainPath = EnsureSubFolder(modScripts, "Main");
-            CreateCSFile(EnsureSubFolder(mainPath, "UMM"), "Main", ModTemplateMain.UMMMain, prompt);
-            CreateCSFile(EnsureSubFolder(mainPath, "UMM"), nameof(ModTemplateMain.StartUp), ModTemplateMain.StartUp, prompt);
-            CreateCSFile(EnsureSubFolder(mainPath, "BepInEx"), "Main", ModTemplateMain.BepInExMain, prompt);
-            CreateCSFile(EnsureSubFolder(mainPath, "BepInEx"), nameof(ModTemplateMain.BepInExModInfo), ModTemplateMain.BepInExModInfo, prompt);
-
-            // Settings
             string settingPath = EnsureSubFolder(modScripts, "Setting");
-            CreateCSFile(EnsureSubFolder(settingPath, "UMM"), "Setting", ModTemplateMain.UMMSetting, prompt);
-            CreateCSFile(EnsureSubFolder(settingPath, "BepInEx"), "Setting", ModTemplateMain.BepInExSetting, prompt);
 
+            if (prompt.UMMCompatibility)
+            {
+                CreateCSFile(EnsureSubFolder(mainPath, "UMM"), "Main", ModTemplateMain.UMMMain, prompt);
+                CreateCSFile(EnsureSubFolder(mainPath, "UMM"), nameof(ModTemplateMain.StartUp), ModTemplateMain.StartUp, prompt);
+
+                CreateCSFile(EnsureSubFolder(settingPath, "UMM"), "Setting", ModTemplateMain.UMMSetting, prompt);
+            }
+            if (prompt.BepInExCompatibility)
+            {
+                CreateCSFile(EnsureSubFolder(mainPath, "BepInEx"), "Main", ModTemplateMain.BepInExMain, prompt);
+                CreateCSFile(EnsureSubFolder(mainPath, "BepInEx"), nameof(ModTemplateMain.BepInExModInfo), ModTemplateMain.BepInExModInfo, prompt);
+
+                CreateCSFile(EnsureSubFolder(settingPath, "BepInEx"), "Setting", ModTemplateMain.BepInExSetting, prompt);
+            }
             // Patches
             CreateCSFile(EnsureSubFolder(modScripts, "Patches"), nameof(ModTemplateMain.ExamplePatch), ModTemplateMain.ExamplePatch, prompt);
 

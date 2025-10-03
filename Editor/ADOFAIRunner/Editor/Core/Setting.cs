@@ -1,13 +1,52 @@
+using ADOFAIModdingHelper.Core.ScriptableObjects;
+using ADOFAIRunner.Common;
 using ADOFAIRunner.Core.DataStructures;
 using ADOFAIRunner.DefineSymbols.Core;
+using System;
 using System.Collections.Generic;
 using System.IO;
+using ThunderKit.Core.Actions;
 using UnityEditor;
 using UnityEngine;
 
 namespace ADOFAIRunner.Core
 {
-    [CreateAssetMenu(fileName = "ARSetting", menuName = "ADOFAI Runner/Settings", order = 1)]
+    public static class CreateADOFAIRunnerSetting
+    {
+        [MenuItem("Assets/" + "ADOFAI Modding Helper/" + "ADOFAI Runner/" + "Create ADOFAI Runner Setting", false, priority: Constants.ADOFAIRunnerMenuPriority)]
+
+        // Original code from ThunderKit -> SelectNewAsset<T> Method
+        public static void CreateADOFAIRunnerSettingAction()
+        {
+            foreach (var file in Directory.GetFiles(Constants.settingsFolder, "*.asset"))
+            {
+                var assetFile = AssetDatabase.LoadAssetAtPath<Setting>(file);
+                if (assetFile != null)
+                {
+                    Debug.Log("ADOFAIRunnerSetting already exists at: " + file);
+                    return;
+                }
+            }
+            Setting asset = ScriptableObject.CreateInstance<Setting>();
+
+            string path = Constants.settingsFolder;
+            var name = "ADOFAIRunnerSettings";
+            string assetPathAndName = AssetDatabase.GenerateUniqueAssetPath($"{path}/{name}.asset");
+            Action<int, string, string> action =
+                (int instanceId, string pathname, string resourceFile) =>
+                {
+                    AssetDatabase.CreateAsset(asset, pathname);
+                    AssetDatabase.SaveAssets();
+                    AssetDatabase.Refresh();
+                    Selection.activeObject = asset;
+                };
+
+            var endAction = ScriptableObject.CreateInstance<SelfDestructingActionAsset>();
+            endAction.action = action;
+            ProjectWindowUtil.StartNameEditingIfProjectWindowExists(asset.GetInstanceID(), endAction, assetPathAndName, null, null);
+        }
+    }
+
     public class Setting : ScriptableObject
     {
         public string BepInExModFolderPath;

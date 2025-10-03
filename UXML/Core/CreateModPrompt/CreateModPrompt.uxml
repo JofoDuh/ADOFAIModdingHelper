@@ -3,8 +3,18 @@
     <ui:VisualElement name="Header" class="CMP-Header">
         <ui:Label tabindex="-1" text="Create Mod Template" name="HeaderText" />
     </ui:VisualElement>
-    <ui:ScrollView focusable="true" name="UMMScrollView" class="CMP-ScrollView" style="flex-grow: 1; padding-top: 4px; padding-right: 4px; padding-bottom: 4px; padding-left: 4px;">
-        <ui:VisualElement name="Properties" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0.2); margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; flex-direction: column;">
+    <ui:ScrollView focusable="true" name="UMMScrollView" class="CMP-ScrollView" style="flex-grow: 1; padding-top: 4px; padding-right: 4px; padding-bottom: 4px; padding-left: 4px; background-color: rgba(0, 0, 0, 0.2); margin-top: 4px; margin-right: 4px; margin-bottom: 4px; margin-left: 4px;">
+        <ui:VisualElement name="Properties">
+            <ui:VisualElement name="modIDVE" class="CMP-Field">
+                <ui:Label text="Mod ID" name="modID" class="CMP-Field-label" style="width: 110px;" />
+                <ui:VisualElement name="modIDInputVE" class="horizontal grow m0 CMP-Field-input" style="width: 250px; flex-grow: 0;">
+                    <ui:TextField binding-path="ModID" name="modIDTF" class="grow m0" />
+                </ui:VisualElement>
+                <ui:VisualElement name="ModIDSameVE" class="CMP-Field" style="margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 16px; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0;">
+                    <ui:Toggle binding-path="SameModIDasModName" name="ModIDSameT" class="CMP-Toggle" />
+                    <ui:Label text="Same as Mod Name" name="ModIDSame" class="CMP-Field-label" style="margin-left: 8px; margin-right: 0;" />
+                </ui:VisualElement>
+            </ui:VisualElement>
             <ui:VisualElement name="modNameVE" class="CMP-Field">
                 <ui:Label text="Mod Name" name="modName" class="CMP-Field-label" style="width: 110px;" />
                 <ui:VisualElement name="modNameInputVE" class="horizontal grow m0 CMP-Field-input" style="flex-grow: 0; width: 250px;">
@@ -23,7 +33,58 @@
                     <ui:TextField binding-path="ModVersion" name="modVersionTF" class="grow m0" />
                 </ui:VisualElement>
             </ui:VisualElement>
+            <ui:VisualElement name="bieCompVE" class="CMP-Field" style="align-items: center;">
+                <ui:Toggle binding-path="BepInExCompatibility" name="BieCompT" class="CMP-Toggle" />
+                <ui:Label text="BepInEx Compatibility" name="BieComp" class="CMP-Field-label" style="margin-right: 0; margin-left: 8px;" />
+            </ui:VisualElement>
+            <ui:VisualElement name="ummCompVE" class="CMP-Field" style="align-items: center;">
+                <ui:Toggle binding-path="UMMCompatibility" name="UmmCompT" class="CMP-Toggle" />
+                <ui:Label text="Unity Mod Manager Compatibility" name="UmmComp" class="CMP-Field-label" style="margin-right: 0; margin-left: 8px;" />
+            </ui:VisualElement>
+            <ui:VisualElement name="includeSceneFolderVE" class="CMP-Field" style="align-items: center;">
+                <ui:Toggle binding-path="SceneFolder" name="IncludeSceneFolderT" class="CMP-Toggle" />
+                <ui:Label text="Scene Folder" name="IncludeSceneFolder" class="CMP-Field-label" style="margin-right: 0; margin-left: 8px;" />
+            </ui:VisualElement>
+            <ui:VisualElement name="includeAssetFolderVE" class="CMP-Field" style="align-items: center; opacity: 1; visibility: visible; display: flex;">
+                <ui:Button name="includeAssetFolderDropdown" class="CMP-createButton" style="width: 25px; height: 25px; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; background-image: url(&quot;project://database/Assets/Plugins/Jofo&apos;s%20APIs/ADOFAIModdingHelper/Images/Assets/DropdownArrow.png?fileID=2800000&amp;guid=3c2edb958e1082c449580cf542f5d633&amp;type=3#DropdownArrow&quot;); background-color: rgba(255, 255, 255, 0); border-top-width: 0; border-right-width: 0; border-bottom-width: 0; border-left-width: 0; margin-left: 0; margin-top: 0; margin-right: 4px; margin-bottom: 0; transition-property: rotate; transition-duration: 0.3s; transition-timing-function: ease-out-cubic;" />
+                <ui:Toggle binding-path="AssetFolder" name="IncludeAssetFolderT" class="CMP-Toggle" />
+                <ui:Label text="Asset Folder" name="IncludeAssetFolder" class="CMP-Field-label" style="margin-right: 0; margin-left: 8px;" />
+            </ui:VisualElement>
+            <ui:VisualElement name="AssetFoldersContainer" style="margin-right: 0; margin-left: 58px; transition-property: opacity, bottom; transition-delay: 0.15s, 0.15s; transition-timing-function: ease-out-cubic, ease-out-cubic; transition-duration: 0.3s, 0.3s;">
+                <ui:VisualElement name="Texture2dVE" class="CMP-Field" style="align-items: center;">
+                    <ui:Toggle binding-path="Texture2dFolder" name="Texture2dT" class="CMP-Toggle" />
+                    <ui:Label text="Texture2D Folder" name="Texture2d" class="CMP-Field-label" style="margin-right: 0; margin-left: 8px;" />
+                </ui:VisualElement>
+                <ui:VisualElement name="ScriptsVE" class="CMP-Field" style="align-items: center;">
+                    <ui:Toggle binding-path="ScriptsFolder" name="ScriptsT" class="CMP-Toggle" />
+                    <ui:Label text="Scripts Folder" name="Scripts" class="CMP-Field-label" style="margin-right: 0; margin-left: 8px;" />
+                </ui:VisualElement>
+                <ui:VisualElement name="PrefabsVE" class="CMP-Field" style="align-items: center;">
+                    <ui:Toggle binding-path="PrefabsFolder" name="PrefabsT" class="CMP-Toggle" />
+                    <ui:Label text="Prefabs Folder" name="Prefabs" class="CMP-Field-label" style="margin-right: 0; margin-left: 8px;" />
+                </ui:VisualElement>
+                <ui:VisualElement name="FontsVE" class="CMP-Field" style="align-items: center;">
+                    <ui:Toggle binding-path="FontsFolder" name="FontsT" class="CMP-Toggle" />
+                    <ui:Label text="Fonts Folder" name="Fonts" class="CMP-Field-label" style="margin-right: 0; margin-left: 8px;" />
+                </ui:VisualElement>
+                <ui:VisualElement name="ShadersVE" class="CMP-Field" style="align-items: center;">
+                    <ui:Toggle binding-path="ShadersFolder" name="ShadersT" class="CMP-Toggle" />
+                    <ui:Label text="Shaders Folder" name="Shaders" class="CMP-Field-label" style="margin-right: 0; margin-left: 8px;" />
+                </ui:VisualElement>
+                <ui:VisualElement name="MaterialsVE" class="CMP-Field" style="align-items: center;">
+                    <ui:Toggle binding-path="MaterialsFolder" name="MaterialsT" class="CMP-Toggle" />
+                    <ui:Label text="Materials Folder" name="Materials" class="CMP-Field-label" style="margin-right: 0; margin-left: 8px;" />
+                </ui:VisualElement>
+                <ui:VisualElement name="AudiosVE" class="CMP-Field" style="align-items: center;">
+                    <ui:Toggle binding-path="AudiosFolder" name="AudiosT" class="CMP-Toggle" />
+                    <ui:Label text="Audios Folder" name="Audios" class="CMP-Field-label" style="margin-right: 0; margin-left: 8px;" />
+                </ui:VisualElement>
+                <ui:VisualElement name="AdditionalFoldersVE" class="CMP-PropertyField">
+                    <uie:PropertyField binding-path="AdditionalAssetFolders" label="Additional Folders" name="AdditionalFoldersPF" view-data-key="AdditionalFoldersPFDK" class="AR-PropertyField" />
+                </ui:VisualElement>
+            </ui:VisualElement>
         </ui:VisualElement>
     </ui:ScrollView>
+    <ui:Label text="Mod name cannot be empty!!" name="ModNameEmptyWarning" class="CMP-Field-label" style="align-self: center; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; color: rgb(255, 0, 0); text-shadow: 2px 2px 1px rgb(0, 0, 0); -unity-text-outline-color: rgb(0, 0, 0); display: none;" />
     <ui:Button name="cmp-create" text="Create" class="CMP-createButton" />
 </ui:UXML>

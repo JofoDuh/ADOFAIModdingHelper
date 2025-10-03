@@ -8,7 +8,7 @@ namespace ADOFAIRunner.Utilities
 {
     public static class ProjectUtilities
     {
-        [MenuItem(Constants.ADOFAIRunnerMenuRoot + "Open Console %#c", false, priority: Constants.ADOFAIRunnerMenuPriority)]
+        //[MenuItem(Constants.ADOFAIRunnerMenuRoot + "Open Console %#c", false, priority: Constants.ADOFAIRunnerMenuPriority)]
         public static void OpenConsoleWindow()
         {
             var assembly = typeof(EditorWindow).Assembly;

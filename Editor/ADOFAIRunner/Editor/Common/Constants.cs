@@ -7,7 +7,7 @@ namespace ADOFAIRunner.Common
     public class Constants
     {
         public const int ADOFAIRunnerMenuPriority = 15;
-        public const string ADOFAIRunnerMenuRoot = "Tools/ADOFAI Runner/";
+        public const string ADOFAIRunnerMenuRoot = "Tools/ADOFAI Modding Helper/ADOFAI Runner/";
         public const string settingsFolder = "Assets/ADOFAIRunnerSettings";
         public const string LogFolder = "Assets/ADOFAIRunnerSettings/Logs";
         public static readonly string ADOFAIRunnerRootPath;
