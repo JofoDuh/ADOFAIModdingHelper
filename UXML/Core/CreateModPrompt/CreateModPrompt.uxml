@@ -46,7 +46,7 @@
                 <ui:Label text="Scene Folder" name="IncludeSceneFolder" class="CMP-Field-label" style="margin-right: 0; margin-left: 8px;" />
             </ui:VisualElement>
             <ui:VisualElement name="includeAssetFolderVE" class="CMP-Field" style="align-items: center; opacity: 1; visibility: visible; display: flex;">
-                <ui:Button name="includeAssetFolderDropdown" class="CMP-createButton" style="width: 25px; height: 25px; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; background-image: url(&quot;project://database/Assets/Plugins/Jofo&apos;s%20APIs/ADOFAIModdingHelper/Images/Assets/DropdownArrow.png?fileID=2800000&amp;guid=3c2edb958e1082c449580cf542f5d633&amp;type=3#DropdownArrow&quot;); background-color: rgba(255, 255, 255, 0); border-top-width: 0; border-right-width: 0; border-bottom-width: 0; border-left-width: 0; margin-left: 0; margin-top: 0; margin-right: 4px; margin-bottom: 0; transition-property: rotate; transition-duration: 0.3s; transition-timing-function: ease-out-cubic;" />
+                <ui:Button name="includeAssetFolderDropdown" class="CMP-createButton" style="width: 25px; height: 25px; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; background-image: url(&quot;project://database/Assets/Plugins/Jofo&apos;s%20APIs/ADOFAIModdingHelper/Assets/Images/DropdownArrow.png?fileID=2800000&amp;guid=3c2edb958e1082c449580cf542f5d633&amp;type=3#DropdownArrow&quot;); background-color: rgba(255, 255, 255, 0); border-top-width: 0; border-right-width: 0; border-bottom-width: 0; border-left-width: 0; margin-left: 0; margin-top: 0; margin-right: 4px; margin-bottom: 0; transition-property: rotate; transition-duration: 0.3s; transition-timing-function: ease-out-cubic;" />
                 <ui:Toggle binding-path="AssetFolder" name="IncludeAssetFolderT" class="CMP-Toggle" />
                 <ui:Label text="Asset Folder" name="IncludeAssetFolder" class="CMP-Field-label" style="margin-right: 0; margin-left: 8px;" />
             </ui:VisualElement>
@@ -75,9 +75,9 @@
                     <ui:Toggle binding-path="MaterialsFolder" name="MaterialsT" class="CMP-Toggle" />
                     <ui:Label text="Materials Folder" name="Materials" class="CMP-Field-label" style="margin-right: 0; margin-left: 8px;" />
                 </ui:VisualElement>
-                <ui:VisualElement name="AudiosVE" class="CMP-Field" style="align-items: center;">
-                    <ui:Toggle binding-path="AudiosFolder" name="AudiosT" class="CMP-Toggle" />
-                    <ui:Label text="Audios Folder" name="Audios" class="CMP-Field-label" style="margin-right: 0; margin-left: 8px;" />
+                <ui:VisualElement name="AudioVE" class="CMP-Field" style="align-items: center;">
+                    <ui:Toggle binding-path="AudioFolder" name="AudioT" class="CMP-Toggle" />
+                    <ui:Label text="Audio Folder" name="Audio" class="CMP-Field-label" style="margin-right: 0; margin-left: 8px;" />
                 </ui:VisualElement>
                 <ui:VisualElement name="AdditionalFoldersVE" class="CMP-PropertyField">
                     <uie:PropertyField binding-path="AdditionalAssetFolders" label="Additional Folders" name="AdditionalFoldersPF" view-data-key="AdditionalFoldersPFDK" class="AR-PropertyField" />

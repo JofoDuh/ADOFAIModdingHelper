@@ -121,7 +121,7 @@ namespace ADOFAIModdingHelper.Core
             string assetPath = EnsureSubFolder(root, "Assets");
 
             var folders = new List<string>();
-            if (prompt.AudiosFolder) folders.Add("Audios");
+            if (prompt.AudioFolder) folders.Add("Audio");
             if (prompt.Texture2dFolder) folders.Add("Textures2D");
             if (prompt.PrefabsFolder) folders.Add("Prefabs");
             if (prompt.ScriptsFolder) folders.Add("Scripts");

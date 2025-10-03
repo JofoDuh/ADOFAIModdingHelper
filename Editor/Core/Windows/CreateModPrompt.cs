@@ -228,7 +228,7 @@ namespace ADOFAIModdingHelper.Core.Windows
 
             public bool AssetFolder = true;
             public bool Texture2dFolder = true;
-            public bool AudiosFolder = false;
+            public bool AudioFolder = false;
             public bool PrefabsFolder = true;
             public bool ScriptsFolder = true;
             public bool FontsFolder = false;
