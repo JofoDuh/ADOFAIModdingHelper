@@ -10,7 +10,7 @@
   },
 
   "dependencies": {
-    "com.unity.scriptablebuildpipeline": "1.16.1",
-    "com.passivepicasso.thunderkit": "9.1.1"
+    "com.passivepicasso.thunderkit": "9.1.1",
+    "com.unity.scriptablebuildpipeline": "1.16.1"
   }
 }

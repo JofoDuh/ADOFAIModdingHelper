@@ -15,6 +15,7 @@ namespace ADOFAIModdingHelper.Core.Windows
     public class CreateModPrompt : EditorWindow
     {
         [SerializeField] private VisualTreeAsset mainPanel;
+        [SerializeField] private Texture2D dropdownSprite;
 
         private CreateModPromptData _localModInfo;
         private SerializedObject _serializedModInfo;
@@ -106,6 +107,16 @@ namespace ADOFAIModdingHelper.Core.Windows
             _createButton.clicked += OnCreateClicked;
 
             // Initial setup
+            if (dropdownSprite != null)
+            {
+                Background background = Background.FromTexture2D(dropdownSprite);
+                _assetFoldersDropdown.style.backgroundImage = background;
+            }
+            else
+            {
+                Debug.LogWarning("Dropdown sprite is not assigned in the inspector!");
+            }
+
             _assetsFolderToggle.value = ShowAssetFolderDropdown;
             _modIDSameModName.value = SameModIDasModName;
             _localModInfo.ModVersion = "1.0.0";
