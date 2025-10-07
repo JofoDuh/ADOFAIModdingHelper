@@ -67,11 +67,12 @@ namespace ADOFAIRunner.Toolbar
                             {
                                 GUI.enabled = runButtonEnabled;
                                 if (GUILayout.Button(
-                                    new GUIContent("Run", "Run ADOFAI after importing ThunderKit's compiled things"),
+                                    new GUIContent("Run", "Run ADOFAI after importing ThunderKit's compiled things\nHold control when clicking to not run ADOFAI after building"),
                                     GUILayout.Width(35f)))
                                 {
+                                    bool ctrlHeld = Event.current != null && Event.current.control;
                                     Debug.Log($"Running {setting.AvailableMods[setting.AvailableModsSelectedIndex].Pipeline}");
-                                    OnRunButtonClicked();
+                                    OnRunButtonClicked(BootGame: !ctrlHeld);
                                 }
                             }
                         }
@@ -112,12 +113,13 @@ namespace ADOFAIRunner.Toolbar
                 }
             }
         }
-        private static async void OnRunButtonClicked(bool fastRun = false, RunLogic.BuildTarget build = RunLogic.BuildTarget.Auto)
+        private static async void OnRunButtonClicked(bool fastRun = false, RunLogic.BuildTarget build = RunLogic.BuildTarget.Auto, bool BootGame = true)
         {
+            if (fastRun && !BootGame) return;
             runButtonEnabled = false;
             try
             {
-                await RunLogic.BuildAndRun(Main.setting, fastRun, build);
+                await RunLogic.BuildAndRun(Main.setting, fastRun, build, BootGame);
             }
             catch (System.Exception e)
             {

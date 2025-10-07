@@ -18,8 +18,9 @@ namespace ADOFAIRunner.Core
         /// Main entry point for the build, deploy, and run process.
         /// </summary>
         /// <param name="settings">The settings ScriptableObject containing all required paths and configurations.</param>
-        public static async Task BuildAndRun(Setting settings, bool fastRun = false, BuildTarget build = BuildTarget.Auto)
+        public static async Task BuildAndRun(Setting settings, bool fastRun = false, BuildTarget build = BuildTarget.Auto, bool BootGame = true)
         {
+            if (fastRun && !BootGame) return;
             Logger.Clear();
             string buildType = ProjectUtilities.GetCurrentBuild();
             if (string.IsNullOrEmpty(buildType))
@@ -90,22 +91,26 @@ namespace ADOFAIRunner.Core
             }
 
             #region 7. Launch the game executable
-            string exePath = build switch
-            {
-                BuildTarget.Auto => buildType == "BEPINEX" ? settings.BepInExExePath : settings.UnityModManagerExePath,
-                BuildTarget.BepInEx => settings.BepInExExePath,
-                BuildTarget.UMM => settings.UnityModManagerExePath,
-                _ => throw new ArgumentOutOfRangeException(nameof(build))
-            };
 
-            if (string.IsNullOrEmpty(exePath) || !File.Exists(exePath))
+            if (BootGame)
             {
-                Debug.LogError($"Executable path is not set or is invalid. Cannot run the game.");
-                return;
+                string exePath = build switch
+                {
+                    BuildTarget.Auto => buildType == "BEPINEX" ? settings.BepInExExePath : settings.UnityModManagerExePath,
+                    BuildTarget.BepInEx => settings.BepInExExePath,
+                    BuildTarget.UMM => settings.UnityModManagerExePath,
+                    _ => throw new ArgumentOutOfRangeException(nameof(build))
+                };
+
+                if (string.IsNullOrEmpty(exePath) || !File.Exists(exePath))
+                {
+                    Debug.LogError($"Executable path is not set or is invalid. Cannot run the game.");
+                    return;
+                }
+
+                Debug.Log($"Launching executable: {exePath}");
+                LaunchExecutable(exePath);
             }
-
-            Debug.Log($"Launching executable: {exePath}");
-            LaunchExecutable(exePath); 
             #endregion
         }
 
