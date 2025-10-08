@@ -49,7 +49,20 @@ namespace [[ModName]]
                 UnityModManager.ModInfo modInfo = File.ReadAllText(info).FromJson<UnityModManager.ModInfo>();
                 if (!File.Exists(Path.Combine(path, modInfo.AssemblyName ?? modInfo.Id)))
                     continue;
-                installeds[modInfo.Id] = UnityModManager.ParseVersion(modInfo.Version);
+                Version parsedVersion;
+                try
+                {
+                    if (string.IsNullOrWhiteSpace(modInfo.Version))
+                        parsedVersion = new Version(0, 0, 0);
+                    else
+                        parsedVersion = UnityModManager.ParseVersion(modInfo.Version);
+                }
+                catch (Exception e)
+                {
+                    modEntry.Logger.Log($""[Startup] Failed to parse version for mod '{modInfo.Id}' ({modInfo.Version ?? ""null""}): {e.Message}"");
+                    parsedVersion = new Version(0, 0, 0);
+                }
+                installeds[modInfo.Id] = parsedVersion;
             }
 
             string[][] requirements = modEntry.LoadAfter
