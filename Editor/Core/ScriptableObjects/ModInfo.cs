@@ -55,14 +55,14 @@ namespace ADOFAIModdingHelper.Core.ScriptableObjects
         public string DisplayName;
         public string Author;
         public string Version;
-        public string ManagerVersion;
-        public string GameVersion;
-        public string[] Requirements;
-        public string[] LoadAfter;
         public string AssemblyName;
         public string EntryMethod;
+        public string[] Requirements;
+        public string[] LoadAfter;
         public string HomePage;
         public string Repository;
+        public string ManagerVersion;
+        public string GameVersion;
         public string ContentType;
     }
 
