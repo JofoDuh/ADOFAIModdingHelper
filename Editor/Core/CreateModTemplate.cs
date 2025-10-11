@@ -44,7 +44,7 @@ namespace ADOFAIModdingHelper.Core
             if (prompt.AssetFolder) assetPath = SetupAssetSubfolders(rootFolder, prompt);
 
             // 6. Scenes folder
-            if (prompt.SceneFolder) EnsureSubFolder(rootFolder, "Scenes");
+            if (prompt.SceneFolder) SetupScenefolder(rootFolder, prompt);
 
             // 7. ThunderKit setup
             var tkPath = EnsureSubFolder(rootFolder, "ThunderKit");
@@ -155,6 +155,19 @@ namespace ADOFAIModdingHelper.Core
             }
 
             return assetPath;
+        }
+
+        private static string SetupScenefolder(string root, CreateModPromptData prompt)
+        {
+            string scenePath = EnsureSubFolder(root, "Scenes");
+
+            if (prompt.SceneTemplate)
+            {
+                var sceneTemplatePath = Path.Combine(scenePath, $"{prompt.ModName}Scene.unity");
+                File.Copy(Path.Combine(Constants.AMHScenePath, "TemplateScene.unity"), sceneTemplatePath);
+                AssetDatabase.ImportAsset(sceneTemplatePath);
+            }
+            return scenePath;
         }
 
         private static Manifest CreateThunderKitManifest(string tkPath, AssemblyDefinitionAsset asmdef, string assetPath, CreateModPromptData prompt)

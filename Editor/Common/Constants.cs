@@ -12,7 +12,7 @@ namespace ADOFAIModdingHelper.Common
         public const string settingsFolder = "Assets/AMHSettings";
         public const string LogFolder = "Assets/AMHSettings/Logs";
         public static readonly string ADOFAIModdingHelperRootPath;
-        public static readonly string AMHTemplatePath;
+        public static readonly string AMHScenePath;
         public static readonly string ThunderKitDefaultPath = Path.Combine(Directory.GetParent(Application.dataPath).FullName, "ThunderKit");
 
         public static readonly string TKDefaultLibrariesPath = Path.Combine(ThunderKitDefaultPath, "Libraries");
@@ -30,7 +30,7 @@ namespace ADOFAIModdingHelper.Common
                 Debug.LogWarning("ADOFAIModdingHelper.asmdef not found! Paths will fallback.");
                 ADOFAIModdingHelperRootPath = "Assets/Plugins/Jofo's APIs/ADOFAIModdingHelper";
             }
-            AMHTemplatePath = Path.Combine(ADOFAIModdingHelperRootPath, "Template");
+            AMHScenePath = Path.Combine(ADOFAIModdingHelperRootPath, "Assets", "Scene");
         }
     }
 }

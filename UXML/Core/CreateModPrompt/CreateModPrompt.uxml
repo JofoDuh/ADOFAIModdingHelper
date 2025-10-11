@@ -41,9 +41,16 @@
                 <ui:Toggle binding-path="UMMCompatibility" name="UmmCompT" class="CMP-Toggle" />
                 <ui:Label text="Unity Mod Manager Compatibility" name="UmmComp" class="CMP-Field-label" style="margin-right: 0; margin-left: 8px;" />
             </ui:VisualElement>
-            <ui:VisualElement name="includeSceneFolderVE" class="CMP-Field" style="align-items: center;">
+            <ui:VisualElement name="includeSceneFolderVE" class="CMP-Field" style="align-items: center; opacity: 1; visibility: visible; display: flex;">
+                <ui:Button name="includeSceneFolderDropdown" class="CMP-createButton" style="width: 25px; height: 25px; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; background-color: rgba(255, 255, 255, 0); border-top-width: 0; border-right-width: 0; border-bottom-width: 0; border-left-width: 0; margin-left: 0; margin-top: 0; margin-right: 4px; margin-bottom: 0; transition-property: rotate; transition-duration: 0.3s; transition-timing-function: ease-out-cubic; background-image: none;" />
                 <ui:Toggle binding-path="SceneFolder" name="IncludeSceneFolderT" class="CMP-Toggle" />
                 <ui:Label text="Scene Folder" name="IncludeSceneFolder" class="CMP-Field-label" style="margin-right: 0; margin-left: 8px;" />
+            </ui:VisualElement>
+            <ui:VisualElement name="SceneTemplateContainer" style="margin-right: 0; margin-left: 58px; transition-property: opacity, bottom; transition-delay: 0.15s, 0.15s; transition-timing-function: ease-out-cubic, ease-out-cubic; transition-duration: 0.3s, 0.3s;">
+                <ui:VisualElement name="SceneTemplateVE" class="CMP-Field" style="align-items: center;">
+                    <ui:Toggle binding-path="SceneTemplate" name="SceneTemplateT" class="CMP-Toggle" />
+                    <ui:Label text="Scene Template" name="SceneTemplate" class="CMP-Field-label" style="margin-right: 0; margin-left: 8px;" />
+                </ui:VisualElement>
             </ui:VisualElement>
             <ui:VisualElement name="includeAssetFolderVE" class="CMP-Field" style="align-items: center; opacity: 1; visibility: visible; display: flex;">
                 <ui:Button name="includeAssetFolderDropdown" class="CMP-createButton" style="width: 25px; height: 25px; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; background-color: rgba(255, 255, 255, 0); border-top-width: 0; border-right-width: 0; border-bottom-width: 0; border-left-width: 0; margin-left: 0; margin-top: 0; margin-right: 4px; margin-bottom: 0; transition-property: rotate; transition-duration: 0.3s; transition-timing-function: ease-out-cubic; background-image: none;" />

@@ -29,6 +29,11 @@ namespace ADOFAIModdingHelper.Core.Windows
         // Mod ID
         private Toggle _modIDSameModName;
 
+        // Scene Template
+        private VisualElement _sceneTemplateContainer;
+        private Toggle _sceneTemplateToggle;
+        private Button _sceneTemplateDropdown;
+
         // Asset Folder
         private VisualElement _assetFoldersContainer;
         private Toggle _assetsFolderToggle;
@@ -39,10 +44,12 @@ namespace ADOFAIModdingHelper.Core.Windows
         private Label _ModNameEmptyWarning;
 
         private bool ShowAssetFolderDropdown = true;
+        private bool ShowSceneTemplateDropdown = true;
         private bool SameModIDasModName = true;
-        private EditorCoroutine _warningCoroutine;
-        private EditorCoroutine _hideCoroutine;
 
+        private EditorCoroutine _warningCoroutine;
+        private EditorCoroutine _hideAssetCoroutine;
+        private EditorCoroutine _hideSceneCoroutine;
 
         [MenuItem(Constants.ADOFAIModdingHelperMenuRoot + "Create Mod Template (Ctrl+Shift+M)", false, priority: Constants.ADOFAIModdingHelperMenuPriority - 1)]
         [MenuItem("Assets/" + Constants.ADOFAIModdingHelperRoot + "Create Mod Template (Ctrl+Shift+M)", false, priority: Constants.ADOFAIModdingHelperMenuPriority - 1)]
@@ -83,6 +90,11 @@ namespace ADOFAIModdingHelper.Core.Windows
             // Mod ID
             _modIDSameModName = rootVisualElement.Q<Toggle>("ModIDSameT");
 
+            // Scene Folder
+            _sceneTemplateContainer = rootVisualElement.Q<VisualElement>("SceneTemplateContainer");
+            _sceneTemplateToggle = rootVisualElement.Q<Toggle>("IncludeSceneFolderT");
+            _sceneTemplateDropdown = rootVisualElement.Q<Button>("includeSceneFolderDropdown");
+
             // Asset Folder
             _assetFoldersContainer = rootVisualElement.Q<VisualElement>("AssetFoldersContainer");
             _assetsFolderToggle = rootVisualElement.Q<Toggle>("IncludeAssetFolderT");
@@ -98,8 +110,11 @@ namespace ADOFAIModdingHelper.Core.Windows
             // Custom Bindings
             _nameField.RegisterCallback<ChangeEvent<string>>(NameField);
 
-            _assetsFolderToggle.RegisterCallback<ChangeEvent<bool>>(AssetsFolderToggleCallBack); // figuring this out pmo
-            _assetFoldersDropdown.clicked += AssetsFolderDropdownButton;
+            _assetsFolderToggle.RegisterCallback<ChangeEvent<bool>>((x) => DropdownToggleCallBack(x, _assetFoldersContainer, _assetFoldersDropdown, ref _hideAssetCoroutine, ShowAssetFolderDropdown)); // figuring this out pmo
+            _assetFoldersDropdown.clicked += () => DropdownButton(ref ShowAssetFolderDropdown, _assetFoldersContainer, _assetFoldersDropdown, ref _hideAssetCoroutine);
+
+            _sceneTemplateToggle.RegisterCallback<ChangeEvent<bool>>((x) => DropdownToggleCallBack(x, _sceneTemplateContainer, _sceneTemplateDropdown, ref _hideSceneCoroutine, ShowSceneTemplateDropdown)); 
+            _sceneTemplateDropdown.clicked += () => DropdownButton(ref ShowSceneTemplateDropdown, _sceneTemplateContainer, _sceneTemplateDropdown, ref _hideSceneCoroutine);
 
             _modIDSameModName.Unbind();
             _modIDSameModName.RegisterCallback<ChangeEvent<bool>>(ModIDSameAsModName);
@@ -111,13 +126,14 @@ namespace ADOFAIModdingHelper.Core.Windows
             {
                 Background background = Background.FromTexture2D(dropdownSprite);
                 _assetFoldersDropdown.style.backgroundImage = background;
+                _sceneTemplateDropdown.style.backgroundImage = background;
             }
             else
             {
                 Debug.LogWarning("Dropdown sprite is not assigned in the inspector!");
             }
 
-            _assetsFolderToggle.value = ShowAssetFolderDropdown;
+            DropdownToggleCallBack(ChangeEvent<bool>.GetPooled(false, _localModInfo.SceneFolder), _sceneTemplateContainer, _sceneTemplateDropdown, ref _hideSceneCoroutine, ShowSceneTemplateDropdown, true);
             _modIDSameModName.value = SameModIDasModName;
             _localModInfo.ModVersion = "1.0.0";
         }
@@ -137,50 +153,50 @@ namespace ADOFAIModdingHelper.Core.Windows
             _idField.SetEnabled(!SameModIDasModName);
         }
 
-        // Asset Folder
-        private void AssetsFolderDropdownButton()
+        // Dropdown Function
+        private void DropdownButton(ref bool showdropdown, VisualElement container, Button dropdown, ref EditorCoroutine coroutine)
         {
-            ShowAssetFolderDropdown = !ShowAssetFolderDropdown;
-            ShowAssetFolders(ShowAssetFolderDropdown);
+            showdropdown = !showdropdown;
+            ShowDropdown(showdropdown, container, dropdown, ref coroutine, showdropdown);
         }
-        private void AssetsFolderToggleCallBack(ChangeEvent<bool> evt)
+        private void DropdownToggleCallBack(ChangeEvent<bool> evt, VisualElement container, Button dropdown, ref EditorCoroutine coroutine, bool showdropdown, bool instant = false)
         {
-            _assetFoldersDropdown.style.display = evt.newValue ? DisplayStyle.Flex : DisplayStyle.None;
-            ShowAssetFolders(evt.newValue ? ShowAssetFolderDropdown : false);
+            dropdown.style.display = evt.newValue ? DisplayStyle.Flex : DisplayStyle.None;
+            ShowDropdown(evt.newValue ? showdropdown : false, container, dropdown, ref coroutine, showdropdown, instant);
         }
 
-        private void ShowAssetFolders(bool show)
+        private void ShowDropdown(bool show, VisualElement container, Button dropdown, ref EditorCoroutine coroutine, bool Showdropdown, bool instant = false)
         {
-            if (_hideCoroutine != null)
+            if (coroutine != null)
             {
-                EditorCoroutineUtility.StopCoroutine(_hideCoroutine);
-                _hideCoroutine = null;
+                EditorCoroutineUtility.StopCoroutine(coroutine);
+                coroutine = null;
             }
 
-            _assetFoldersDropdown.style.rotate = ShowAssetFolderDropdown ? new Rotate(new Angle(0, AngleUnit.Degree)) : new Rotate(new Angle(-90, AngleUnit.Degree));
+            dropdown.style.rotate = Showdropdown ? new Rotate(new Angle(0, AngleUnit.Degree)) : new Rotate(new Angle(-90, AngleUnit.Degree));
 
-            float duration = UXMLUtils.GetUXMLAnimationProperty<TimeValue>(_assetFoldersContainer.style, "bottom").value; // ts didnt work broken heart emoji
+            float duration = UXMLUtils.GetUXMLAnimationProperty<TimeValue>(container.style, "bottom").value; // ts didnt work broken heart emoji
             if (duration <= 0f) duration = 0.3f; // this is the one that keeps it working cuh
 
             if (show)
             {
-                _assetFoldersContainer.style.opacity = 0f;
-                _assetFoldersContainer.style.bottom = 10f;
-                _assetFoldersContainer.style.display = DisplayStyle.Flex;
+                container.style.opacity = 0f;
+                container.style.bottom = 10f;
+                container.style.display = DisplayStyle.Flex;
 
-                _assetFoldersContainer.style.opacity = 1f;
-                _assetFoldersContainer.style.bottom = 0f;
+                container.style.opacity = 1f;
+                container.style.bottom = 0f;
             }
             else
             {
-                _assetFoldersContainer.style.display = DisplayStyle.Flex;
-                _assetFoldersContainer.style.opacity = 1f;
-                _assetFoldersContainer.style.bottom = 0f;
+                container.style.display = DisplayStyle.Flex;
+                container.style.opacity = 1f;
+                container.style.bottom = 0f;
 
-                _assetFoldersContainer.style.opacity = 0f;
-                _assetFoldersContainer.style.bottom = 10f;
+                container.style.opacity = 0f;
+                container.style.bottom = 10f;
 
-                _hideCoroutine = EditorCoroutineUtility.StartCoroutine(HideAfter(duration, () => _assetFoldersContainer.style.display = DisplayStyle.None), this);
+                coroutine = EditorCoroutineUtility.StartCoroutine(HideAfter(instant ? 0 : duration, () => container.style.display = DisplayStyle.None), this);
             }
         }
 
@@ -224,7 +240,6 @@ namespace ADOFAIModdingHelper.Core.Windows
             }
 
             action.Invoke();
-            //Debug.Log("oabnsgoihasg");
         }
 
         [System.Serializable]
@@ -236,6 +251,7 @@ namespace ADOFAIModdingHelper.Core.Windows
             public string ModVersion;
 
             public bool SceneFolder = false;
+            public bool SceneTemplate = true;
 
             public bool AssetFolder = true;
             public bool Texture2dFolder = true;
