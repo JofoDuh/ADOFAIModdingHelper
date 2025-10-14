@@ -5,6 +5,7 @@ using System;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using ThunderKit.Core.Manifests;
 using ThunderKit.Core.Manifests.Datums;
 using UnityEngine;
 
@@ -86,8 +87,15 @@ namespace ADOFAIRunner.Core
                 #endregion
 
                 #region 6. Process and move asset bundles
-                await ProcessAssetBundles(manifest, settings.ThunderkitOutputPath, assetsDestinationFolder); 
+                await ProcessAssetBundles(manifest, settings.ThunderkitOutputPath, assetsDestinationFolder);
                 #endregion
+
+                if (Directory.Exists(assetsDestinationFolder) &&
+                    !Directory.EnumerateFileSystemEntries(assetsDestinationFolder).Any())
+                {
+                    Directory.Delete(assetsDestinationFolder);
+                    Debug.Log($"Deleted empty assets folder: {assetsDestinationFolder}");
+                }
             }
 
             #region 7. Launch the game executable

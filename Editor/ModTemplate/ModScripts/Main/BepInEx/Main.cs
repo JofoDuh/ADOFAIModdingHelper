@@ -45,7 +45,7 @@ namespace [[ModName]]
             ModSetting = Setting.Load();
             Assets = AssetBundle.LoadFromFile(FilesUtility.GetAssetBundlePath(""[[ModName]]_assets.bundle"", ModPath)); // Use if needed to load your asset bundle :D
 
-            MainHarmony = new Harmony(ModTemplateInfo.PLUGIN_GUID);
+            MainHarmony = new Harmony([[ModName]]Info.PLUGIN_GUID);
             MainHarmony.PatchAll();
         }
 

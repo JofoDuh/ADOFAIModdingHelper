@@ -44,11 +44,12 @@ namespace ADOFAIModdingHelper.Core
             if (prompt.AssetFolder) assetPath = SetupAssetSubfolders(rootFolder, prompt);
 
             // 6. Scenes folder
-            if (prompt.SceneFolder) SetupScenefolder(rootFolder, prompt);
+            string scenePath = string.Empty;
+            if (prompt.SceneFolder) scenePath = SetupScenefolder(rootFolder, prompt);
 
             // 7. ThunderKit setup
             var tkPath = EnsureSubFolder(rootFolder, "ThunderKit");
-            var manifest = CreateThunderKitManifest(tkPath, asmdefAsset, assetPath, prompt);
+            var manifest = CreateThunderKitManifest(tkPath, asmdefAsset, assetPath, scenePath, prompt);
             var pipeline = CreateThunderKitPipeline(tkPath, manifest, prompt);
 
             // 8. Scripts
@@ -170,7 +171,7 @@ namespace ADOFAIModdingHelper.Core
             return scenePath;
         }
 
-        private static Manifest CreateThunderKitManifest(string tkPath, AssemblyDefinitionAsset asmdef, string assetPath, CreateModPromptData prompt)
+        private static Manifest CreateThunderKitManifest(string tkPath, AssemblyDefinitionAsset asmdef, string assetPath, string scenePath, CreateModPromptData prompt)
         {
             var manifest = ScriptableObject.CreateInstance<Manifest>();
             ModManifestUtils.CreateModManifest(manifest, 0,
@@ -193,11 +194,22 @@ namespace ADOFAIModdingHelper.Core
             {
                 assetBundleDef.assets = new UnityEngine.Object[] { AssetDatabase.LoadAssetAtPath(assetPath, typeof(UnityEngine.Object)) };
             }
+
             var bundleDatum = ModManifestUtils.GetManifestDatum<AssetBundleDefinitions>(manifest);
             var bundles = bundleDatum.assetBundles?.ToList() ?? new List<AssetBundleDefinition>();
             bundles.Add(assetBundleDef);
-            bundleDatum.assetBundles = bundles.ToArray();
 
+            if (!string.IsNullOrEmpty(scenePath) && File.Exists(Path.Combine(scenePath, $"{prompt.ModName}Scene.unity")))
+            {
+                var sceneBundleDef = new AssetBundleDefinition
+                {
+                    assetBundleName = $"{prompt.ModName}_scenes.bundle"
+                };
+                sceneBundleDef.assets = new UnityEngine.Object[] { AssetDatabase.LoadAssetAtPath(Path.Combine(scenePath, $"{prompt.ModName}Scene.unity"), typeof(UnityEngine.Object)) };
+                bundles.Add(sceneBundleDef);
+            }
+            bundleDatum.assetBundles = bundles.ToArray();
+            EditorUtility.SetDirty(manifest);
             return manifest;
         }
 
@@ -214,6 +226,8 @@ namespace ADOFAIModdingHelper.Core
 
             var deleteJobBundle = ModPipelineUtils.GetPipelineJob<Delete>(pipeline, 1);
             deleteJobBundle.Path = Constants.TKDefaultAssetBundleStagingPath;
+
+            EditorUtility.SetDirty(pipeline);
 
             return pipeline;
         }
