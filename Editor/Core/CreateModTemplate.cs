@@ -1,8 +1,8 @@
 using ADOFAIModdingHelper.Common;
 using ADOFAIModdingHelper.Core.ScriptableObjects;
+using ADOFAIModdingHelper.ModTemplate;
 using ADOFAIModdingHelper.ThunderKitUtils;
 using ADOFAIModdingHelper.Utilities;
-using ADOFAIModdingHelper.ModTemplate;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -11,8 +11,10 @@ using ThunderKit.Core.Manifests.Datums;
 using ThunderKit.Core.Pipelines;
 using ThunderKit.Core.Pipelines.Jobs;
 using UnityEditor;
+using UnityEditor.SceneManagement;
 using UnityEditorInternal;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using static ADOFAIModdingHelper.Core.Windows.CreateModPrompt;
 
 namespace ADOFAIModdingHelper.Core
@@ -164,9 +166,25 @@ namespace ADOFAIModdingHelper.Core
 
             if (prompt.SceneTemplate)
             {
-                var sceneTemplatePath = Path.Combine(scenePath, $"{prompt.ModName}Scene.unity");
-                File.Copy(Path.Combine(Constants.AMHScenePath, "TemplateScene.unity"), sceneTemplatePath);
-                AssetDatabase.ImportAsset(sceneTemplatePath);
+                string srcTemplatePath = Path.Combine(Constants.AMHScenePath, "TemplateScene.unity");
+                string dstScenePath = Path.Combine(scenePath, $"{prompt.ModName}Scene.unity");
+
+                Scene templateScene = EditorSceneManager.OpenScene(srcTemplatePath, OpenSceneMode.Additive);
+
+                Scene newScene = EditorSceneManager.NewScene(NewSceneSetup.EmptyScene, NewSceneMode.Additive);
+                foreach (var rootObj in templateScene.GetRootGameObjects())
+                {
+                    var clone = Object.Instantiate(rootObj);
+                    clone.name = rootObj.name;
+                    EditorSceneManager.MoveGameObjectToScene(clone, newScene);
+                }
+
+                EditorSceneManager.SaveScene(newScene, dstScenePath);
+
+                EditorSceneManager.CloseScene(templateScene, true);
+                EditorSceneManager.CloseScene(newScene, true);
+
+                AssetDatabase.Refresh();
             }
             return scenePath;
         }
