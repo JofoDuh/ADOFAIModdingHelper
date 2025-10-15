@@ -160,33 +160,16 @@ namespace ADOFAIModdingHelper.Core
             return assetPath;
         }
 
-        private static string SetupScenefolder(string root, CreateModPromptData prompt)
-        {
-            string scenePath = EnsureSubFolder(root, "Scenes");
-
-            if (prompt.SceneTemplate)
-            {
-                string srcTemplatePath = Path.Combine(Constants.AMHScenePath, "TemplateScene.unity");
-                string dstScenePath = Path.Combine(scenePath, $"{prompt.ModName}Scene.unity");
-
-                Scene templateScene = EditorSceneManager.OpenScene(srcTemplatePath, OpenSceneMode.Additive);
-
-                Scene newScene = EditorSceneManager.NewScene(NewSceneSetup.EmptyScene, NewSceneMode.Additive);
-                foreach (var rootObj in templateScene.GetRootGameObjects())
-                {
-                    var clone = Object.Instantiate(rootObj);
-                    clone.name = rootObj.name;
-                    EditorSceneManager.MoveGameObjectToScene(clone, newScene);
-                }
-
-                EditorSceneManager.SaveScene(newScene, dstScenePath);
-
-                EditorSceneManager.CloseScene(templateScene, true);
-                EditorSceneManager.CloseScene(newScene, true);
-
-                AssetDatabase.Refresh();
-            }
-            return scenePath;
+        private static string SetupScenefolder(string root, CreateModPromptData prompt) 
+        { 
+            string scenePath = EnsureSubFolder(root, "Scenes"); 
+            if (prompt.SceneTemplate) 
+            { 
+                var sceneTemplatePath = Path.Combine(scenePath, $"{prompt.ModName}Scene.unity"); 
+                File.Copy(Path.Combine(Constants.AMHScenePath, "TemplateScene.unity"), sceneTemplatePath); 
+                AssetDatabase.ImportAsset(sceneTemplatePath); 
+            } 
+            return scenePath; 
         }
 
         private static Manifest CreateThunderKitManifest(string tkPath, AssemblyDefinitionAsset asmdef, string assetPath, string scenePath, CreateModPromptData prompt)
