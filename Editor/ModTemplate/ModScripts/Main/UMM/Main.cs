@@ -38,8 +38,7 @@ namespace [[ModName]]
             IsEnabled = value;
             if (IsEnabled)
             {
-                Assets = AssetBundle.LoadFromFile(FilesUtility.GetAssetBundlePath(""[[ModName]]_assets.bundle"", ModPath)); // Use if needed to load your asset bundle :D
-
+                if (Assets == null) Assets = AssetBundle.LoadFromFile(FilesUtility.GetAssetBundlePath(""[[ModName]]_assets.bundle"", ModPath)); // Use if needed to load your asset bundle :D
                 MainHarmony = new Harmony(modEntry.Info.Id);
                 MainHarmony.PatchAll();
                 modEntry.OnGUI = OnGUI;
@@ -48,6 +47,11 @@ namespace [[ModName]]
             else
             {
                 MainHarmony.UnpatchAll();
+                if (Assets != null)
+                {
+                    Assets.Unload(true);
+                    Assets = null;
+                }
             }
             return true;
         }
