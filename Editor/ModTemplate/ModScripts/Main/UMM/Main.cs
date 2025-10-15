@@ -46,7 +46,7 @@ namespace [[ModName]]
             }
             else
             {
-                MainHarmony.UnpatchAll();
+                MainHarmony.UnpatchAll(modEntry.Info.Id);
                 if (Assets != null)
                 {
                     Assets.Unload(true);
