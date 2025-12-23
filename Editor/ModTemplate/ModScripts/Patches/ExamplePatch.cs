@@ -21,7 +21,7 @@ namespace ADOFAIModdingHelper.ModTemplate
         //    }
         //}
 
-        // Use this for precise method targetting
+        // ^ Use this for precise method targetting
 
         // Option 2:
         //[HarmonyPatch(typeof(scnEditor), nameof(scnEditor.Play) or ""Play"" if method is private)]
@@ -29,13 +29,13 @@ namespace ADOFAIModdingHelper.ModTemplate
         //{
         //}
 
-        // This option allows you to ignore ""TargetMethod"" though isn't very flexible when it comes to accurate targetting.
+        // ^ This option allows you to ignore ""TargetMethod"" though isn't very flexible when it comes to accurate targetting.
 
         // Now, within the same class, you have a few options to patch the method that I know:
 
         // Prefix: If you define a Prefix method within the patch, then it will execute the code in the method BEFORE the targetted method runs. Prefix can return void or bool. Return bool is useful since if you return false, it will skip the targetted method from running completely, and if you return true, it let the method run.
 
-        // Postfix: Opposite of Prefex, a void method that runs after the targetted method finish running.
+        // Postfix: Opposite of Prefix, a void method that runs after the targetted method finishes running.
 
         // Transpiler: Allows you to completely rewrite the IL instructions of the targetted method completely. Really hard to pull off since you'd need to learn IL (Intermediate Language).
 

@@ -103,7 +103,7 @@ namespace ADOFAIModdingHelper.Core
                     EntryMethod = $"{prompt.ModName}.Startup.Load"
                 };
             }
-            else if (prompt.BepInExCompatibility)
+            if (prompt.BepInExCompatibility)
             {
                 modInfo.modInfoBIE = new ModInfoBIE
                 {
