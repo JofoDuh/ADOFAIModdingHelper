@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 6107e3a4f3337b343b838fb88f8d14b4
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - m_ViewDataDictionary: {instanceID: 0}
+  - MainPanel: {fileID: 9197481963319205126, guid: 7ded2b681aa49934ca62dea3c081f86d, type: 3}
+  - ModsPanel: {fileID: 9197481963319205126, guid: 6a2def116e06a00458a96e5d4ebfb94f, type: 3}
+  - ListElement: {fileID: 9197481963319205126, guid: 66178056d2d99c748aa66a34cc804d55, type: 3}
+  - ButtonTemplate: {fileID: 9197481963319205126, guid: 0c8fb458295ced04880bde619ec8e42a, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

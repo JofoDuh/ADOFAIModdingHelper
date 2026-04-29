@@ -1,0 +1,13 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="True">
+    <Style src="project://database/Assets/UXML/ModsConfig/Main/ListElement.uss?fileID=7433441132597879392&amp;guid=095b1ad0b78de9142bd69e58f16f351d&amp;type=3#ListElement" />
+    <ui:VisualElement name="ParentContainer" style="flex-grow: 1;">
+        <ui:VisualElement name="PaddedContainer" style="flex-grow: 1; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 5px; padding-right: 5px; padding-bottom: 5px; padding-left: 5px; flex-direction: row;">
+            <ui:VisualElement name="ModListContainer" style="background-color: rgba(0, 0, 0, 0.2); border-top-left-radius: 4px; border-top-right-radius: 4px; border-bottom-right-radius: 4px; border-bottom-left-radius: 4px; min-width: 250px; flex-shrink: 1;">
+                <ui:Label tabindex="-1" text="Available Mods" parse-escape-sequences="true" display-tooltip-when-elided="true" name="ModListHeader" class="AMHSettingHeader" style="color: rgb(255, 255, 255); -unity-text-outline-width: 0; padding-top: 4px; padding-right: 4px; padding-bottom: 4px; padding-left: 4px; margin-top: 4px; margin-right: 4px; margin-bottom: 4px; margin-left: 4px; font-size: 20px; border-top-left-radius: 4px; border-top-right-radius: 4px; border-bottom-right-radius: 4px; border-bottom-left-radius: 4px; background-color: rgba(0, 0, 0, 0.2); -unity-text-align: upper-center;" />
+                <ui:ListView name="ModList" item-height="20" focusable="true" fixed-item-height="30" show-border="false" class="CustomList" style="flex-grow: 1; border-top-left-radius: 4px; border-top-right-radius: 4px; border-bottom-right-radius: 4px; border-bottom-left-radius: 4px; padding-top: 4px; padding-right: 4px; padding-bottom: 4px; padding-left: 4px; margin-top: 4px; margin-right: 4px; margin-bottom: 4px; margin-left: 4px; background-color: rgba(0, 0, 0, 0.2);" />
+            </ui:VisualElement>
+            <ui:VisualElement name="Spacer" style="flex-grow: 0; width: 4px;" />
+            <ui:VisualElement name="ModConfigContainer" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0.2); border-top-left-radius: 4px; border-top-right-radius: 4px; border-bottom-right-radius: 4px; border-bottom-left-radius: 4px; flex-shrink: 0; min-width: 300px;" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

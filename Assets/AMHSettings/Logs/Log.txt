@@ -1,0 +1,8 @@
+2026-03-29 14:02:58 [Warning] Dropdown sprite is not assigned in the inspector!
+2026-03-29 14:37:40 [Error] Assets\Editor\Core\ModBuilder.cs(93,24): error CS0103: The name 'names' does not exist in the current context
+2026-03-29 14:37:40 [Error] Assets\Editor\Core\ModBuilder.cs(95,17): error CS0103: The name 'names' does not exist in the current context
+2026-03-29 14:46:20 [Error] Assets\Editor\Core\ModBuilder.cs(29,3): error CS1585: Member modifier 'private' must precede the member type and name
+2026-03-29 14:46:20 [Warning] Import Error Code:(4)
+Message: Build asset version error: assets/amhsettings/logs/log.txt in SourceAssetDB has modification time of '2026-03-29T12:37:40.8340802Z' while content on disk has modification time of '2026-03-29T12:46:20.8848915Z'
+
+2026-03-29 14:54:51 [Error] Assets\Editor\Core\ModBuilder.cs(29,3): error CS1585: Member modifier 'private' must precede the member type and name

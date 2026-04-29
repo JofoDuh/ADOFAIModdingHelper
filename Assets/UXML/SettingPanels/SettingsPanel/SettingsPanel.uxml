@@ -1,0 +1,37 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="True">
+    <Style src="project://database/Assets/UXML/SettingPanels/SettingsPanel/SettingsPanel.uss?fileID=7433441132597879392&amp;guid=6e231eb9ff468f04fb918beac46a8603&amp;type=3#SettingsPanel" />
+    <ui:VisualElement name="ModSettings" style="flex-grow: 1;">
+        <ui:ScrollView focusable="true" name="UMMScrollView" mode="Vertical" horizontal-scroller-visibility="Hidden" class="AMH-ScrollView" style="flex-grow: 1; padding-top: 4px; padding-right: 4px; padding-bottom: 4px; padding-left: 4px;">
+            <ui:VisualElement name="Settings" style="flex-grow: 1;">
+                <ui:VisualElement name="Header" class="AMH-Header">
+                    <ui:Label tabindex="-1" text="Settings" parse-escape-sequences="true" display-tooltip-when-elided="true" name="HeaderText" class="AMH-RoundBorder AMH-Header" style="background-color: rgba(0, 0, 0, 0.2); padding-top: 4px; padding-right: 4px; padding-bottom: 4px; padding-left: 4px; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0;" />
+                </ui:VisualElement>
+                <ui:VisualElement name="Spacer" style="flex-grow: 0; height: 4px; display: flex;" />
+                <ui:VisualElement name="ShortcutProperties" class="AMH-RoundBorder" style="background-color: rgba(0, 0, 0, 0.2); margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; display: flex;">
+                    <ui:VisualElement name="Project" class="AMH-Field" style="display: none;">
+                        <ui:Label text="Project" name="ProjectLabel" class="AMH-Field-label" style="align-self: center; font-size: 25px; -unity-font-style: bold;" />
+                    </ui:VisualElement>
+                    <ui:VisualElement name="ADOFAIPath" class="AMH-Field">
+                        <ui:Label text="ADOFAI Path" name="ADOFAIPathLabel" class="AMH-Field-label" style="align-self: center; font-size: 25px; flex-basis: 250px; flex-shrink: 1;" />
+                        <ui:VisualElement class="horizontal grow m0 AMH-Field-input" style="height: 25px;">
+                            <ui:TextField binding-path="ADOFAIPath" name="ADOFAIPathTextField" class="grow m0" style="margin-right: 4px;" />
+                            <ui:Button text="Browse" parse-escape-sequences="true" display-tooltip-when-elided="true" name="ADOFAIPathBrowseButton" class="AMH-standardButton" style="margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; text-overflow: ellipsis; height: auto; padding-top: 0; padding-right: 16px; padding-bottom: 0; padding-left: 16px;" />
+                        </ui:VisualElement>
+                    </ui:VisualElement>
+                    <ui:VisualElement name="NoScenes" class="AMH-Field" style="justify-content: center; align-items: center; display: none;">
+                        <ui:Label text="No Scenes Found D:" name="NoScenesLabel" class="AMH-Field-label" style="font-size: 25px; -unity-text-align: middle-center;" />
+                    </ui:VisualElement>
+                    <ui:VisualElement name="ImportGame" class="AMH-Field" style="flex-grow: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0;">
+                        <ui:Button text="Import Game" parse-escape-sequences="true" display-tooltip-when-elided="true" name="ImportGameButton" class="AMH-standardButton" style="flex-grow: 1; margin-top: 4px; margin-right: 4px; margin-bottom: 4px; margin-left: 4px; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; flex-shrink: 1; text-overflow: ellipsis; height: auto;" />
+                    </ui:VisualElement>
+                    <ui:VisualElement name="SeperateTabs" class="AMH-Field">
+                        <ui:Toggle binding-path="SeperateBuildTabs" name="SeperateTabsToggle" class="AMH-Toggle" />
+                        <ui:Label text="Seperate Build Tabs" name="SeperateTabsLabel" class="AMH-Field-label" style="align-self: center; font-size: 25px; flex-basis: auto; margin-left: 4px;" />
+                    </ui:VisualElement>
+                    <ui:VisualElement name="Spacer" style="flex-grow: 0; height: 4px; display: flex;" />
+                    <ui:VisualElement name="SceneNav" class="AMH-Field" style="flex-grow: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; flex-direction: column; display: none;" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+        </ui:ScrollView>
+    </ui:VisualElement>
+</ui:UXML>
