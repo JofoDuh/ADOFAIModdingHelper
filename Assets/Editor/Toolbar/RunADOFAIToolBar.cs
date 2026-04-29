@@ -15,8 +15,6 @@ namespace ADOFAIModdingHelper.Toolbar
     {
         public static Setting setting = Setting.Config;
         private static Texture2D gearIcon = EditorGUIUtility.IconContent("SettingsIcon").image as Texture2D;
-        private static bool runButtonEnabled = true;
-        //static bool FastRunOption = false;
 
         [InitializeOnLoadMethod]
         public static void Init()
@@ -30,7 +28,7 @@ namespace ADOFAIModdingHelper.Toolbar
             {
                 if (setting.CurrentConfig == null || !setting.AllMods.Contains(setting.CurrentConfig))
                 {
-                    setting.CurrentConfig = setting.AllMods[setting.AllMods.Count - 1];
+                    setting.CurrentConfig = setting.AllMods[^1];
                 }
             }
             else
@@ -45,6 +43,11 @@ namespace ADOFAIModdingHelper.Toolbar
                 {
                     try
                     {
+                        if (setting.CurrentConfig == null)
+                        {
+                            GUILayout.Label("Add a mod twin", GUILayout.Width(ProjectUtilities.DynamicaWidth("Add a mod twin", 5f)));
+                            return;
+                        }
                         if (setting.AllMods != null &&
                             setting.AllMods.Count > 0 &&
                             setting.CurrentConfig != null)
@@ -72,7 +75,6 @@ namespace ADOFAIModdingHelper.Toolbar
 
                             if (setting.CurrentConfig != null)
                             {
-                                GUI.enabled = runButtonEnabled;
                                 if (GUILayout.Button(
                                     new GUIContent("Run", "Run ADOFAI after importing ThunderKit's compiled things\nHold control when clicking to not run ADOFAI after building"),
                                     GUILayout.Width(35f)))
@@ -87,27 +89,8 @@ namespace ADOFAIModdingHelper.Toolbar
                             new GUIContent("FRun", "Quick Run ADOFAI without compiling or anything"),
                             GUILayout.Width(43f)))
                         {
-                            //FastRunOption = !FastRunOption;
                             setting.CurrentConfig.RunApp();
                         }
-                        //if (FastRunOption)
-                        //{
-                        //    if (GUILayout.Button(
-                        //        new GUIContent("UMM", "Quick Run ADOFAI without compiling or anything"),
-                        //        GUILayout.Width(45f)))
-                        //    {
-                        //        FastRunOption = false;
-                        //        setting.CurrentConfig.RunApp();
-                        //    }
-                        //    if (GUILayout.Button(
-                        //        new GUIContent("BepInEx", "Quick Run ADOFAI without compiling or anything"),
-                        //        GUILayout.Width(55f)))
-                        //    {
-                        //        FastRunOption = false;
-                        //        setting.CurrentConfig.RunApp();
-                        //    }
-                        //}
-                        GUI.enabled = true;
 
                         if (GUILayout.Button(new GUIContent(gearIcon, "Open ADOFAIRunner Settings"),
                             GUILayout.Width(20f), GUILayout.Height(20f)))

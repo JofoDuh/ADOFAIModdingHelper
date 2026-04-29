@@ -55,42 +55,5 @@ namespace ADOFAIModdingHelper.ScriptableObjects
             EditorUtility.SetDirty(this);
 #endif
         }
-
-        public void Initialize()
-        {
-            //DefineSymbolToggler.SetBuild(0);
-            //string rootPath = Directory.GetParent(Application.dataPath).FullName;
-            //string gitignorePath = Path.Combine(rootPath, ".gitignore");
-
-            //if (!File.Exists(gitignorePath))
-            //{
-            //    Debug.LogWarning($".gitignore not found at {gitignorePath}");
-            //    return;
-            //}
-
-            //string header = "# ADOFAI Modding Helper Setting";
-            //string rule = "/[Aa]ssets/AMHSettings";
-
-            //string all = File.ReadAllText(gitignorePath);
-
-            //bool endsWithNewline = all.EndsWith("\n") || all.EndsWith("\r");
-
-            //if (!all.Contains(rule))
-            //{
-            //    using (StreamWriter sw = File.AppendText(gitignorePath))
-            //    {
-            //        if (!endsWithNewline) sw.WriteLine();
-            //        sw.WriteLine("");
-            //        sw.WriteLine(header);
-            //        sw.Write(rule);
-            //    }
-
-            //    Debug.Log("Added AMHSettings ignore rule to .gitignore");
-            //}
-            //else
-            //{
-            //    Debug.Log("Rule already exists in .gitignore");
-            //}
-        }
     }
 }

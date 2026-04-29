@@ -23,8 +23,6 @@ namespace ADOFAIModdingHelper.Core.Windows
         // Main Information
         private TextField _idField;
         private TextField _nameField;
-        private TextField _authorField;
-        private TextField _versionField;
 
         // Mod ID
         private Toggle _modIDSameModName;
@@ -84,8 +82,6 @@ namespace ADOFAIModdingHelper.Core.Windows
             // Main Information
             _idField = rootVisualElement.Q<TextField>("modIDTF");
             _nameField = rootVisualElement.Q<TextField>("modNameTF");
-            _authorField = rootVisualElement.Q<TextField>("modAuthorTF");
-            _versionField = rootVisualElement.Q<TextField>("modVersionTF");
 
             // Mod ID
             _modIDSameModName = rootVisualElement.Q<Toggle>("ModIDSameT");
@@ -175,8 +171,7 @@ namespace ADOFAIModdingHelper.Core.Windows
 
             dropdown.style.rotate = Showdropdown ? new Rotate(new Angle(0, AngleUnit.Degree)) : new Rotate(new Angle(-90, AngleUnit.Degree));
 
-            float duration = UXMLUtils.GetUXMLAnimationProperty<TimeValue>(container.style, "bottom").value; // ts didnt work broken heart emoji
-            if (duration <= 0f) duration = 0.3f; // this is the one that keeps it working cuh
+            float duration = 0.3f;
 
             if (show)
             {
@@ -207,11 +202,10 @@ namespace ADOFAIModdingHelper.Core.Windows
             if (string.IsNullOrEmpty(_localModInfo.ModName)) { ShowWarning(_ModNameEmptyWarning, "Mod name cannot be empty!!"); ToReturn = true; }
             else if (string.IsNullOrEmpty(_localModInfo.ModID)) { ShowWarning(_ModNameEmptyWarning, "Mod ID cannot be empty!!"); ToReturn = true; }
             else if (string.IsNullOrEmpty(_localModInfo.ModVersion)) { ShowWarning(_ModNameEmptyWarning, "Mod version cannot be empty!!"); ToReturn = true; }
-            //else if (!_localModInfo.BepInExCompatibility && !_localModInfo.UMMCompatibility) { ShowWarning(_ModNameEmptyWarning, "Choose a mod loader!!"); ToReturn = true; }
             if (ToReturn) return;
 
             _serializedModInfo.ApplyModifiedProperties();
-            //CreateModTemplate.CreateModAction(_localModInfo);
+            CreateModTemplate.CreateModAction(_localModInfo);
 
             Close();
         }
@@ -262,9 +256,6 @@ namespace ADOFAIModdingHelper.Core.Windows
             public bool MaterialsFolder = false;
             public bool ShadersFolder = false;
             public List<string> AdditionalAssetFolders = new List<string>();
-
-            //public bool BepInExCompatibility = true;
-            //public bool UMMCompatibility = true;
         }
     }
 }

@@ -43,33 +43,5 @@ namespace ADOFAIModdingHelper.Utilities
                 Debug.Log($"Folder already exists: {path}");
             }
         }
-
-        //public static string GetCurrentBuild()
-        //{
-        //    string UMM_SYMBOL = "UNITYMODMANAGER";
-        //    string BEPINEX_SYMBOL = "BEPINEX";
-
-        //    var targetGroup = EditorUserBuildSettings.selectedBuildTargetGroup;
-        //    string symbols = PlayerSettings.GetScriptingDefineSymbolsForGroup(targetGroup);
-
-        //    bool hasUMM = symbols.Contains(UMM_SYMBOL);
-        //    bool hasBepInEx = symbols.Contains(BEPINEX_SYMBOL);
-
-        //    if (!hasUMM && !hasBepInEx) DefineSymbolToggler.SetBuild(Main.setting.AvailableBuildOptionsSelectedIndex);
-        //    if ((hasUMM && !hasBepInEx) ||
-        //        (Main.setting.AvailableBuildOptions[Main.setting.AvailableBuildOptionsSelectedIndex] == "Unity Mod Manager"))
-        //    {
-        //        return UMM_SYMBOL;
-        //    }
-        //    else if ((hasBepInEx && !hasUMM) ||
-        //        (Main.setting.AvailableBuildOptions[Main.setting.AvailableBuildOptionsSelectedIndex] == "BepInEx"))
-        //    {
-        //        return BEPINEX_SYMBOL;
-        //    }
-        //    else
-        //    {
-        //        return string.Empty;
-        //    }
-        //}
     }
 }
