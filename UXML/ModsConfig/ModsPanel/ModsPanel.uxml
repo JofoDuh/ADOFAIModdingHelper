@@ -19,7 +19,8 @@
                 <ui:Label text="Mod Information" name="Text" class="AMH-Field-label" style="font-size: 25px; -unity-font-style: bold;" />
                 <ui:VisualElement name="SpacerColor" style="flex-grow: 1; background-color: rgb(255, 255, 255); border-top-left-radius: 4px; border-top-right-radius: 4px; border-bottom-right-radius: 4px; border-bottom-left-radius: 4px; height: 4px;" />
             </ui:VisualElement>
-            <ui:VisualElement name="ModInfoProperties" class="AMH-RoundBorder" style="background-color: rgba(0, 0, 0, 0.2); margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; display: none;">
+            <ui:VisualElement name="ModInfoProperties" class="AMH-RoundBorder" style="background-color: rgba(0, 0, 0, 0.2); margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; display: flex;">
+                <uie:PropertyField binding-path="modInfo" label="Mod Info" name="ModInfoField" class="AMH-ListView" />
                 <ui:VisualElement name="ModEntry" class="AMH-Field" style="align-items: center;">
                     <ui:Button text="Mod Entry" parse-escape-sequences="true" display-tooltip-when-elided="true" name="ModEntryLabelButton" style="margin-top: 0; margin-right: 4px; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; background-color: rgba(0, 0, 0, 0); font-size: 25px; color: rgb(255, 255, 255); -unity-font-style: bold; border-top-width: 0; border-right-width: 0; border-bottom-width: 0; border-left-width: 0;" />
                     <ui:Button parse-escape-sequences="true" display-tooltip-when-elided="true" name="ModEntryArrowButton" style="margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; background-color: rgba(0, 0, 0, 0); background-image: url(&quot;project://database/Assets/Graphics/Images/DropdownArrow.png?fileID=2800000&amp;guid=3c2edb958e1082c449580cf542f5d633&amp;type=3#DropdownArrow&quot;); border-top-width: 0; border-right-width: 0; border-bottom-width: 0; border-left-width: 0; width: 25px; height: 25px;" />
@@ -110,17 +111,20 @@
                         <uie:PropertyField view-data-key="ModsList" binding-path="LoadAfter" label="Load After" class="AMH-ListView" />
                     </ui:VisualElement>
                 </ui:VisualElement>
+                <ui:VisualElement name="NoModInfo" class="AMH-Field" style="justify-content: center; align-items: center;">
+                    <ui:Label text="Missing Mod Info" name="NoModInfoLabel" class="AMH-Field-label" style="font-size: 25px; -unity-text-align: middle-center;" />
+                </ui:VisualElement>
             </ui:VisualElement>
             <ui:VisualElement name="BarSpacer" style="flex-grow: 0; background-color: rgba(0, 0, 0, 0.2); display: none; padding-top: 5px; padding-right: 5px; padding-bottom: 5px; padding-left: 5px; border-top-left-radius: 4px; border-top-right-radius: 4px; border-bottom-right-radius: 4px; border-bottom-left-radius: 4px; margin-top: 5px; margin-bottom: 5px;">
                 <ui:Label text="Builder" name="Text" class="AMH-Field-label" style="font-size: 25px; -unity-font-style: bold;" />
                 <ui:VisualElement name="SpacerColor" style="flex-grow: 1; background-color: rgb(255, 255, 255); border-top-left-radius: 4px; border-top-right-radius: 4px; border-bottom-right-radius: 4px; border-bottom-left-radius: 4px; height: 4px;" />
             </ui:VisualElement>
-            <ui:VisualElement name="BuilderProperties" class="AMH-RoundBorder" style="background-color: rgba(0, 0, 0, 0.2); margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; display: flex;">
+            <ui:VisualElement name="BuilderProperties" class="AMH-RoundBorder" style="background-color: rgba(0, 0, 0, 0.2); margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; display: none;">
                 <ui:VisualElement name="Assets" class="AMH-Field">
                     <ui:Label text="Assets" name="AssetsLabel" class="AMH-Field-label" style="align-self: center; font-size: 25px; -unity-font-style: bold;" />
                 </ui:VisualElement>
                 <ui:VisualElement name="AsmdefList" class="AMH-Field" style="flex-grow: 1;">
-                    <uie:PropertyField binding-path="AssemblyDefinitions" label="Assembly Definitions" class="AMH-PropertyField AMH-ListView" />
+                    <uie:PropertyField binding-path="AssemblyDefinitions" label="Assembly Definitions" class="AMH-ListView" />
                 </ui:VisualElement>
                 <ui:VisualElement name="PreCompList" class="AMH-Field" style="flex-grow: 1;">
                     <ui:ListView reorder-mode="Animated" show-add-remove-footer="true" show-foldout-header="true" reorderable="true" header-title="Precompiled Assemblies" name="PreCompListView" fixed-item-height="32" class="AMH-ListView" />

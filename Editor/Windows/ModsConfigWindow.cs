@@ -1,12 +1,9 @@
 using ADOFAIModdingHelper.Common;
 using ADOFAIModdingHelper.ScriptableObjects;
-using ADOFAIModdingHelper.ScriptableObjects.Editor;
-using ADOFAIModdingHelper.Utilities;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using UnityEditor;
-using UnityEditor.Compilation;
 using UnityEditor.SceneManagement;
 using UnityEditor.UIElements;
 using UnityEngine;
@@ -37,6 +34,8 @@ namespace ADOFAIModdingHelper.Windows
             public const string ModConfigContainer = "ModConfigContainer";
 
             // Mod Info
+            public const string ModEntry = "ModEntry";
+            public const string NoModInfo = "NoModInfo";
             public const string ModInfoLabelButton = "ModEntryLabelButton";
             public const string ModInfoArrowButton = "ModEntryArrowButton";
             public const string ModInfoDataContainer = "ModInfoDataContainer";
@@ -164,10 +163,10 @@ namespace ADOFAIModdingHelper.Windows
 
             _modList.itemsSource = _configs;
             _modList.makeItem = () => ListElement.CloneTree().ElementAt(0);
-            _modList.bindItem = (element, i) => element.Q<Label>().text = _configs[i].modInfo.Id;
+            _modList.bindItem = (element, i) => element.Q<Label>().text = _configs[i].modInfo?.Id ?? "No Mod Info";
             _modList.selectionChanged += items =>
             {
-                if (items.FirstOrDefault() is ModToolsConfig selected && selected.modInfo != null)
+                if (items.FirstOrDefault() is ModToolsConfig selected)
                     OnModSelected(selected);
             };
 
@@ -193,10 +192,26 @@ namespace ADOFAIModdingHelper.Windows
             _currentActivePanel = panel;
             _modConfigContainer.Add(panel);
 
-            panel.Bind(new SerializedObject(config.modInfo));
-            panel.Bind(new SerializedObject(config));
+            SerializedObject soConfig = new SerializedObject(config);
+            panel.Bind(soConfig);
 
-            SetupModInfo(panel);
+            panel.TrackPropertyValue(soConfig.FindProperty("modInfo"), (prop) =>
+            {
+                _modList.RefreshItems();
+                OnModSelected(config);
+            });
+
+            if (config.modInfo != null)
+            {
+                SerializedObject soModInfo = new SerializedObject(config.modInfo);
+                panel.Bind(soModInfo);
+
+                panel.Q<VisualElement>(Names.PanelModInfo).TrackPropertyValue(soModInfo.FindProperty("Id"), (prop) =>
+                {
+                    _modList.RefreshItems();
+                });
+            }
+            SetupModInfo(config, panel);
             SetupBuilder(config, panel);
             SetupBuildManagement(config, panel);
             SetupShortcutsElements(config, panel);
@@ -205,7 +220,7 @@ namespace ADOFAIModdingHelper.Windows
 
             SetNavButton(panel, _currentNav);
             UpdateSeparateTabs(Setting.Config.SeperateBuildTabs);
-            ShowContainer(_showModInfo, ref _showModInfo, panel.Q<VisualElement>(Names.ModInfoDataContainer), panel.Q<Button>(Names.ModInfoArrowButton));
+            ShowContainer(config.modInfo == null ? false : _showModInfo, ref _showModInfo, panel.Q<VisualElement>(Names.ModInfoDataContainer), panel.Q<Button>(Names.ModInfoArrowButton));
             ShowContainer(_showGithubConfig, ref _showGithubConfig, panel.Q<VisualElement>(Names.GithubConfigContainer), panel.Q<Button>(Names.GithubConfigArrowButton));
         }
 
@@ -213,8 +228,11 @@ namespace ADOFAIModdingHelper.Windows
         // Mod Info Section
         // -----------------------------------------------------------------------
 
-        private void SetupModInfo(VisualElement panel)
+        private void SetupModInfo(ModToolsConfig config, VisualElement panel)
         {
+            panel.Q<VisualElement>(Names.ModEntry).style.display = config.modInfo != null ? DisplayStyle.Flex : DisplayStyle.None;
+            panel.Q<VisualElement>(Names.NoModInfo).style.display = config.modInfo == null ? DisplayStyle.Flex : DisplayStyle.None;
+            if (config.modInfo == null) { return; }
             panel.Q<Button>(Names.ModInfoLabelButton).clicked += () => ShowContainer(!_showModInfo, ref _showModInfo, panel.Q<VisualElement>(Names.ModInfoDataContainer), panel.Q<Button>(Names.ModInfoArrowButton));
             panel.Q<Button>(Names.ModInfoArrowButton).clicked += () => ShowContainer(!_showModInfo, ref _showModInfo, panel.Q<VisualElement>(Names.ModInfoDataContainer), panel.Q<Button>(Names.ModInfoArrowButton));
         }
@@ -270,7 +288,7 @@ namespace ADOFAIModdingHelper.Windows
             panel.Q<Button>(Names.BuildButton).clicked += () =>
             {
                 string dest = config.copyToDirectory
-                    ? Path.Combine(Path.GetDirectoryName(Setting.Config.ADOFAIPath)!, "Mods", config.modInfo.Id)
+                    ? Path.Combine(Path.GetDirectoryName(Setting.Config.ADOFAIPath)!, "Mods", config.modInfo?.Id ?? $"{config.name}_{config.GetInstanceID()}")
                     : null;
                 config.BuildMod(dest);
             };
@@ -420,7 +438,7 @@ namespace ADOFAIModdingHelper.Windows
 
         private void SetupBuildManagement(ModToolsConfig config, VisualElement panel)
         {
-            string buildPath = Path.Combine(Directory.GetCurrentDirectory(), "Builds", config.modInfo.Id);
+            string buildPath = Path.Combine(Directory.GetCurrentDirectory(), "Builds", config.modInfo?.Id ?? $"{config.name}_{config.GetInstanceID()}");
             var cachedBuildLabel = panel.Q<Label>(Names.CachedBuildLabel);
 
             panel.Q<Button>(Names.OpenBuildDirectory).clicked += () =>
@@ -534,6 +552,7 @@ namespace ADOFAIModdingHelper.Windows
 
         private void ReloadSceneCache(string path)
         {
+            if (string.IsNullOrWhiteSpace(path)) return;
             if (!Directory.Exists(path)) Directory.CreateDirectory(path);
             foreach (var file in Directory.GetFiles(path, "*.unity", SearchOption.AllDirectories))
                 _scenes.Add(Path.GetFullPath(file));
@@ -691,6 +710,7 @@ namespace ADOFAIModdingHelper.Windows
 
         private static FileSystemWatcher CreateFileWatcher(string path, string filter, System.Action onChange)
         {
+            if (string.IsNullOrWhiteSpace(path)) return null;
             if (!Directory.Exists(path)) Directory.CreateDirectory(path);
 
             var watcher = new FileSystemWatcher(path)
@@ -733,7 +753,7 @@ namespace ADOFAIModdingHelper.Windows
         {
             if (config == null || label == null) return;
 
-            string path = Path.Combine(Directory.GetCurrentDirectory(), "Builds", config.modInfo.Id);
+            string path = Path.Combine(Directory.GetCurrentDirectory(), "Builds", config.modInfo?.Id ?? $"{config.name}_{config.GetInstanceID()}");
             if (!Directory.Exists(path))
             {
                 label.text = "Cached Builds: 0 (0 B)";

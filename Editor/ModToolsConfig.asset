@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b4cb21aefbad0d4499aa99cff3fb0e42, type: 3}
+  m_Name: ModToolsConfig
+  m_EditorClassIdentifier: 
+  BuildDirectory: 
+  openModInfoFoldout: 0
+  skipAssetBundleBuild: 0
+  createZip: 0
+  developmentBuild: 1
+  generateDebugSymbols: 0
+  buildEveryPlatform: 0
+  serializedBuildPlatforms: 
+  copyToDirectory: 0
+  runApplication: 0
+  runApplicationThroughSteam: 0
+  deleteBuildsExceptLastN: 0
+  automaticallyDeleteBuilds: 1
+  modInfo: {fileID: 11400000, guid: e00a86a2abbd9374fad01b9a78566d9c, type: 2}
+  AssemblyDefinitions: []
+  PrecompAssemblies: []
+  AssetBundles: []
+  RepositoryLink: 
+  IssuesLink: 
+  PullRequestsLink: 
+  ScenesPath: 
