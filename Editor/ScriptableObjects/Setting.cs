@@ -1,6 +1,7 @@
 using ADOFAIModdingHelper.Common;
 using ADOFAIModdingHelper.Core;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using UnityEditor;
@@ -35,25 +36,33 @@ namespace ADOFAIModdingHelper.ScriptableObjects
         public GameImporter Importer = new GameImporter();
         public string ADOFAIPath;
         public bool SeperateBuildTabs;
+        private List<ModToolsConfig> _allModsCache;
+
         public List<ModToolsConfig> AllMods
         {
             get
             {
-                return AssetDatabase.FindAssets("t:ModToolsConfig")
-                .Select(AssetDatabase.GUIDToAssetPath)
-                .Select(AssetDatabase.LoadAssetAtPath<ModToolsConfig>)
-                .Where(config => config != null)
-                .ToList();
+                if (_allModsCache != null) return _allModsCache;
+                _allModsCache = AssetDatabase.FindAssets("t:ModToolsConfig")
+                    .Select(AssetDatabase.GUIDToAssetPath)
+                    .Select(AssetDatabase.LoadAssetAtPath<ModToolsConfig>)
+                    .Where(config => config != null)
+                    .ToList();
+                return _allModsCache;
             }
         }
 
         public ModToolsConfig CurrentConfig;
 
-        private void OnValidate()
+        public void RunAppWithoutConfig() => Process.Start(Config.ADOFAIPath);
+        private void OnEnable()
         {
-#if UNITY_EDITOR
-            EditorUtility.SetDirty(this);
-#endif
+            EditorApplication.projectChanged += InvalidateCache;
         }
+        private void OnDisable()
+        {
+            EditorApplication.projectChanged -= InvalidateCache;
+        }
+        private void InvalidateCache() => _allModsCache = null;
     }
 }

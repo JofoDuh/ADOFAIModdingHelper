@@ -10,13 +10,13 @@ namespace ADOFAIModdingHelper.ScriptableObjects
 {
     public static class CreateScriptableObjects
     {
-        [MenuItem(Constants.ADOFAIModdingHelperMenuRoot + "Create Mod Info", false, priority: Constants.ADOFAIModdingHelperMenuPriority)]
+        [MenuItem(Constants.ADOFAIModdingHelperMenuRoot + "ScriptableObjects/" + "Create Mod Info", false, priority: Constants.ADOFAIModdingHelperMenuPriority)]
         public static void CreateModInfo()
         {
             CreateShitsAction<ModInfo>();
         }
 
-        [MenuItem(Constants.ADOFAIModdingHelperMenuRoot + "Create Mod Config", false, priority: Constants.ADOFAIModdingHelperMenuPriority)]
+        [MenuItem(Constants.ADOFAIModdingHelperMenuRoot + "ScriptableObjects/" + "Create Mod Config", false, priority: Constants.ADOFAIModdingHelperMenuPriority)]
         public static void CreateModConfig()
         {
             CreateShitsAction<ModToolsConfig>();

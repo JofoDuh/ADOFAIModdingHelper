@@ -2,20 +2,20 @@ namespace ADOFAIModdingHelper.ModTemplate
 {
 	public static partial class ModTemplateMain
 	{
-        public const string BepInExSetting = @"#if BEPINEX
-using Newtonsoft.Json;
+        public const string UMMSetting = @"using Newtonsoft.Json;
 using System;
 using [[ModName]].Utilities;
 using System.Collections.Generic;
 using System.IO;
+using UnityModManagerNet;
 
-namespace [[ModName]].Settings
+namespace [[ModName]].ModScripts.Settings
 {
-    public class Setting
+    public class Setting : UnityModManager.ModSettings
     {
-        public void Save()
+        public override void Save(UnityModManager.ModEntry modEntry)
         {
-            var filepath = Path.Combine(Main.ModPath, typeof(Setting).Name + "".json"");
+            var filepath = Path.Combine(modEntry.Path, typeof(Setting).Name + "".json"");
             try
             {
                 var settings = new JsonSerializerSettings
@@ -32,9 +32,9 @@ namespace [[ModName]].Settings
             }
         }
 
-        public static Setting Load()
+        public static Setting Load(UnityModManager.ModEntry modEntry)
         {
-            var filepath = Path.Combine(Main.ModPath, typeof(Setting).Name + "".json"");
+            var filepath = Path.Combine(modEntry.Path, typeof(Setting).Name + "".json"");
 
             if (!File.Exists(filepath))
             {
@@ -63,7 +63,6 @@ namespace [[ModName]].Settings
             }
         }
     }
-}
-#endif";
+}";
 	}
 }

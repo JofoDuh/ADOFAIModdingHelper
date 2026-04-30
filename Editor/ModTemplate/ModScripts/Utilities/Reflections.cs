@@ -11,7 +11,7 @@ using System.Reflection;
 // All Code From MagicShapeMultiply
 
 // Some Utilities when working with Reflections
-namespace [[ModName]].Utilities
+namespace [[ModName]].ModScripts.Utilities
 {
     public static class Reflections
     {

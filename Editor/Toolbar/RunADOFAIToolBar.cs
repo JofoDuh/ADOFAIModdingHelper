@@ -46,7 +46,6 @@ namespace ADOFAIModdingHelper.Toolbar
                         if (setting.CurrentConfig == null)
                         {
                             GUILayout.Label("Add a mod twin", GUILayout.Width(ProjectUtilities.DynamicaWidth("Add a mod twin", 5f)));
-                            return;
                         }
                         if (setting.AllMods != null &&
                             setting.AllMods.Count > 0 &&
@@ -57,15 +56,15 @@ namespace ADOFAIModdingHelper.Toolbar
                             {
                                 var mod = setting.AllMods[i].modInfo;
                                 list[i] = mod != null
-                                    ? new GUIContent(mod.Id, "Add more mods in the ADOFAIRunner settings!")
-                                    : new GUIContent("<null>", "This slot is empty");
+                                    ? new GUIContent(mod.Id)
+                                    : new GUIContent("<null>", "Add a Mod Info");
                             }
 
                             int selectedIndex = EditorGUILayout.Popup(
                                 setting.AllMods.FindIndex(config => config == setting.CurrentConfig),
                                 list,
                                 GUILayout.Width(ProjectUtilities.DynamicaWidth(
-                                    setting.CurrentConfig == null ? "<null>" : setting.CurrentConfig.modInfo.Id, 5f))
+                                    setting.CurrentConfig.modInfo == null ? "<null>" : setting.CurrentConfig.modInfo.Id, 5f))
                             );
 
                             if (selectedIndex >= 0 && selectedIndex < setting.AllMods.Count)
@@ -73,10 +72,10 @@ namespace ADOFAIModdingHelper.Toolbar
                                 setting.CurrentConfig = setting.AllMods[selectedIndex];
                             }
 
-                            if (setting.CurrentConfig != null)
+                            if (setting.CurrentConfig != null || setting.CurrentConfig.modInfo)
                             {
                                 if (GUILayout.Button(
-                                    new GUIContent("Run", "Run ADOFAI after importing ThunderKit's compiled things\nHold control when clicking to not run ADOFAI after building"),
+                                    new GUIContent("Run", "Compile Everything and Run ADOFAI"),
                                     GUILayout.Width(35f)))
                                 {
                                     bool ctrlHeld = Event.current != null && Event.current.control;
@@ -89,7 +88,8 @@ namespace ADOFAIModdingHelper.Toolbar
                             new GUIContent("FRun", "Quick Run ADOFAI without compiling or anything"),
                             GUILayout.Width(43f)))
                         {
-                            setting.CurrentConfig.RunApp();
+                            if (setting.CurrentConfig != null) setting.CurrentConfig.RunApp();
+                            else setting.RunAppWithoutConfig();
                         }
 
                         if (GUILayout.Button(new GUIContent(gearIcon, "Open ADOFAIRunner Settings"),
@@ -98,7 +98,7 @@ namespace ADOFAIModdingHelper.Toolbar
                             ModsConfigWindow.OpenBuild();
                         }
                         GUILayout.Space(5);
-                        setting.CurrentConfig.generateDebugSymbols = GUILayout.Toggle(setting.CurrentConfig.generateDebugSymbols, new GUIContent("PDB", "Check to include the PDB file when moving"));
+                        //setting.CurrentConfig.generateDebugSymbols = GUILayout.Toggle(setting.CurrentConfig.generateDebugSymbols, new GUIContent("PDB", "Check to include the PDB file when moving"));
                     }
                     finally { }
                 }

@@ -6,7 +6,7 @@
 using System;
 using UnityEngine;
 
-namespace [[ModName]].Utilities
+namespace [[ModName]].ModScripts.Utilities
 {
     public class Vector2Converter : JsonConverter<Vector2>
     {

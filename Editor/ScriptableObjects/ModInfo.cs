@@ -11,23 +11,6 @@ namespace ADOFAIModdingHelper.ScriptableObjects
     [JsonObject(MemberSerialization.OptIn)]
     public class ModInfo : ScriptableObject
     {
-        //private static ModInfo _info;
-
-        //public static ModInfo Info
-        //{
-        //    get
-        //    {
-        //        if (_info)
-        //            return _info;
-        //        _info = AssetDatabase.LoadAssetAtPath<ModInfo>("Assets/Editor/Info.asset");
-        //        if (_info) return _info;
-
-        //        _info = CreateInstance<ModInfo>();
-        //        AssetDatabase.CreateAsset(_info, "Assets/Editor/Info.asset");
-
-        //        return _info;
-        //    }
-        //}
 
 #pragma warning disable format // @formatter:off
 		[Header("Mod Entry")]

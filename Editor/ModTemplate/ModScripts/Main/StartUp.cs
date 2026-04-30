@@ -2,8 +2,7 @@
 {
 	public static partial class ModTemplateMain
 	{
-        public const string StartUp = @"#if UNITYMODMANAGER
-using HarmonyLib;
+        public const string StartUp = @"using HarmonyLib;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -18,7 +17,7 @@ using [[ModName]].Utilities;
 // All Code From MagicShapeMultiply
 
 // This is used to ensure required mods are present, as well as giving the mod its reference.
-namespace [[ModName]]
+namespace [[ModName]].ModScripts.Main
 {
     public static class Startup
     {
@@ -275,7 +274,6 @@ namespace [[ModName]]
             return modPath;
         }
     }
-}
-#endif";
+}";
 	}
 }

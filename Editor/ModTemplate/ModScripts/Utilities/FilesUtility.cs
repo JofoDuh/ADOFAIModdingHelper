@@ -5,7 +5,7 @@ namespace ADOFAIModdingHelper.ModTemplate
         public const string FilesUtilities = @"using System;
 using System.IO;
 
-namespace [[ModName]].Utilities
+namespace [[ModName]].ModScripts.Utilities
 {
     public static class FilesUtility
     {

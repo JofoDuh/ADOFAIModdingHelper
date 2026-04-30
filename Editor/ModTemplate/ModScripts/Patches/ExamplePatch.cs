@@ -2,7 +2,7 @@ namespace ADOFAIModdingHelper.ModTemplate
 {
 	public static partial class ModTemplateMain
 	{
-        public const string ExamplePatch = @"namespace [[ModName]].Patches
+        public const string ExamplePatch = @"namespace [[ModName]].ModScripts.Patches
 {
     public static class ExamplePatch
     {

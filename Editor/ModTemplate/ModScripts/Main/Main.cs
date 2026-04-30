@@ -2,14 +2,13 @@ namespace ADOFAIModdingHelper.ModTemplate
 {
 	public static partial class ModTemplateMain
 	{
-        public const string UMMMain = @"#if UNITYMODMANAGER
-using HarmonyLib;
+        public const string UMMMain = @"using HarmonyLib;
 using UnityEngine;
 using UnityModManagerNet;
 using [[ModName]].Utilities;
 using [[ModName]].Settings;
 
-namespace [[ModName]]
+namespace [[ModName]].ModScripts.Main
 {
     public static class Main
     {
@@ -69,7 +68,6 @@ namespace [[ModName]]
             ModSetting.Save(modEntry);
         }
     }
-}
-#endif";
+}";
 	}
 }

@@ -213,7 +213,6 @@ namespace ADOFAIModdingHelper.Core
     ""precompiledReferences"": [
         ""0Harmony.dll"",
         ""UnityModManager.dll"",
-        ""BepInEx.dll"",
         ""Newtonsoft.Json.dll"",
         ""Assembly-CSharp.dll"",
         ""Assembly-CSharp-firstpass.dll"",
