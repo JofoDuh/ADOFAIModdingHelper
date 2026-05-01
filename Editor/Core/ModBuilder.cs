@@ -42,7 +42,9 @@ namespace ADOFAIModdingHelper.Core
 				_defines = new List<string>();
 				AssetDatabase.SaveAssets();
 				var now = DateTime.Now - DateTime.UnixEpoch;
-				_buildPath = Path.Combine("Builds", ModInfo.Info.Id, $"{Math.Round(now.TotalMilliseconds)}");
+                string name = $"NoName_{ModInfo.Info.GetInstanceID()}";
+                if (ModInfo.Info != null && !string.IsNullOrWhiteSpace(ModInfo.Info.Id)) name = ModInfo.Info.Id;
+                _buildPath = Path.Combine("Builds", name, $"{Math.Round(now.TotalMilliseconds)}");
 				Directory.CreateDirectory(_buildPath);
 
 				if (DevelopmentBuild) _defines.Add("DEBUG");
