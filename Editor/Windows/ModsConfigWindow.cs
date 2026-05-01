@@ -220,7 +220,7 @@ namespace ADOFAIModdingHelper.Windows
 
             SetNavButton(panel, _currentNav);
             UpdateSeparateTabs(Setting.Config.SeperateBuildTabs);
-            ShowContainer(config.modInfo == null ? false : _showModInfo, ref _showModInfo, panel.Q<VisualElement>(Names.ModInfoDataContainer), panel.Q<Button>(Names.ModInfoArrowButton));
+            ShowContainer(config.modInfo != null && _showModInfo, ref _showModInfo, panel.Q<VisualElement>(Names.ModInfoDataContainer), panel.Q<Button>(Names.ModInfoArrowButton));
             ShowContainer(_showGithubConfig, ref _showGithubConfig, panel.Q<VisualElement>(Names.GithubConfigContainer), panel.Q<Button>(Names.GithubConfigArrowButton));
         }
 
@@ -249,9 +249,7 @@ namespace ADOFAIModdingHelper.Windows
             var assetBundlesProp = configSO.FindProperty("AssetBundles");
             List<string> projectBundles = AssetDatabase.GetAllAssetBundleNames().ToList();
 
-            if (projectBundles.Count == 0) projectBundles.Add("(No Bundles Found)");
-
-            SetupCustomList(panel.Q<ListView>(Names.AssetBundleList), assetBundlesProp, "BundleDropdown", projectBundles);
+            SetupCustomList(panel.Q<ListView>(Names.AssetBundleList), assetBundlesProp, "BundleDropdown", projectBundles, "(No Bundles Found)");
 
             var precompProp = configSO.FindProperty("PrecompAssemblies");
             List<string> projectDlls = AssetDatabase.FindAssets("t:DefaultAsset")
@@ -260,8 +258,7 @@ namespace ADOFAIModdingHelper.Windows
                 .Select(Path.GetFileName)
                 .ToList();
 
-            if (projectDlls.Count == 0) projectDlls.Add("(No DLLs Found)");
-            SetupCustomList(panel.Q<ListView>(Names.PrecompList), precompProp, "DllDropdown", projectDlls);
+            SetupCustomList(panel.Q<ListView>(Names.PrecompList), precompProp, "DllDropdown", projectDlls, "(No DLLs Found)");
 
             void UpdatePlatformVisibility(bool buildAll) =>
                 platformContainer.style.display = buildAll ? DisplayStyle.None : DisplayStyle.Flex;

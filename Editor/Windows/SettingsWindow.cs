@@ -95,7 +95,7 @@ namespace ADOFAIModdingHelper.Windows
             switch (item)
             {
                 case "Settings":
-                    BindSettingsPanel();
+                    SetupSettings();
                     break;
             }
         }
@@ -104,7 +104,7 @@ namespace ADOFAIModdingHelper.Windows
         // Settings Panel
         // -----------------------------------------------------------------------
 
-        private void BindSettingsPanel()
+        private void SetupSettings()
         {
             var panel = SettingsPanel.CloneTree();
             _spContainer.Add(panel);
