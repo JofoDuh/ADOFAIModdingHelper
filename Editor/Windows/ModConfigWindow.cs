@@ -578,8 +578,7 @@ namespace ADOFAIModdingHelper.Windows
         private void SetupBuildManagement()
         {
             var config = ModToolsConfig.Config;
-            string buildPath = Path.Combine(Directory.GetCurrentDirectory(), "Builds",
-                ModInfo.Info.Id ?? $"{config.name}_{config.GetInstanceID()}");
+            string buildPath = Path.Combine(Directory.GetCurrentDirectory(), "Builds");
             var cachedBuildLabel = _subPanel.Q<Label>(Names.CachedBuildLabel);
 
             _subPanel.Q<VisualElement>(Names.PanelBuildManagement).Bind(new SerializedObject(config));
