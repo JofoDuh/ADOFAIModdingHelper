@@ -84,7 +84,7 @@ namespace ADOFAIModdingHelper.ScriptableObjects
                     if (createZip)
                     {
                         using var stream =
-                            new FileStream(Path.Combine(Path.GetDirectoryName(task.Result)!, modInfo.Id + ".zip"),
+                            new FileStream(Path.Combine(Path.GetDirectoryName(task.Result)!, modInfo?.Id ?? $"{name}_{GetInstanceID()}" + ".zip"),
                                 FileMode.Create);
                         using var archive = new ZipArchive(stream, ZipArchiveMode.Create);
 
@@ -124,7 +124,7 @@ namespace ADOFAIModdingHelper.ScriptableObjects
         }
         public void DeleteBuilds(int? saveLeast = null)
         {
-            var buildDir = Path.Combine(Directory.GetCurrentDirectory(), "Builds", modInfo.Id);
+            var buildDir = Path.Combine(Directory.GetCurrentDirectory(), "Builds", modInfo?.Id ?? $"{name}_{GetInstanceID()}");
 
             if (Directory.Exists(buildDir))
             {
@@ -135,7 +135,7 @@ namespace ADOFAIModdingHelper.ScriptableObjects
                     Directory.Delete(buildDir, true);
                     Directory.CreateDirectory(buildDir);
 
-                    var zipPath = Path.Combine(buildDir, modInfo.Id + ".zip");
+                    var zipPath = Path.Combine(buildDir, modInfo?.Id ?? $"{name}_{GetInstanceID()}" + ".zip");
 
                     if (File.Exists(zipPath))
                         File.Delete(zipPath);
