@@ -1,9 +1,9 @@
+//Original Code from https://github.com/ADOFAI-gg/ADOFAI-Modding-Toolkit
 using ADOFAIModdingHelper.Common;
 using Newtonsoft.Json;
 using System;
 using System.IO;
 using UnityEditor;
-using UnityEditor.ProjectWindowCallback;
 using UnityEngine;
 
 namespace ADOFAIModdingHelper.ScriptableObjects
