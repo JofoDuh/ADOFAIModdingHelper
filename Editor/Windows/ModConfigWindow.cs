@@ -456,7 +456,7 @@ namespace ADOFAIModdingHelper.Windows
                 else
                 {
                     EditorUtility.DisplayDialog("Mod ID is Empty!",
-                        "The Mod ID is empty, which will create a folder of type \"config.name_instance\". Do you want to proceed?", "Ok");
+                        "The Mod ID is empty, which will create a folder of type \"config.name_instance\". Cannot proceed.", "Ok");
                 }
             };
         }
