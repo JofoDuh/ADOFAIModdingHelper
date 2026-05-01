@@ -5,6 +5,10 @@ Unity package made for ADOFAI mod developers derived from [ADOFAI-Modding-Toolki
 - Uses Unity 2022.3.33f1 (must be in sync with the game)
 - Uses [Harmony 2](https://harmony.pardeike.net/)
 - Build options available at `Mods/Builds Config`, `Settings` under Unity Editor’s `ADOFAI Modding Helper` ribbon menu.
+***
+## Other Detail
+- If you want to be able to make/manage multiple mods within the same Unity Project, then refer to the [MultiMods Branch](https://github.com/JofoDuh/ADOFAIModdingHelper/tree/MultiMods). The main branch only supports one mod per Unity Project.
+***
 ## Setup
 1. Install ADOFAI Modding Helper
     - ## Package Manager
