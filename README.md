@@ -29,6 +29,6 @@ Unity package made for ADOFAI mod developers derived from [ADOFAI-Modding-Toolki
 * **FRun** - Quickly launch the executable.
 ***
 ## License
-LGPL 3.0; Refer to [LICENSE](LICENSE.txt).
+MIT; Refer to [LICENSE](LICENSE.txt).
 
 For files under [Editor](Editor), refer to [/Editor/LICENSE](<Editor/LICENSE.txt>).
