@@ -88,7 +88,7 @@ namespace ADOFAIModdingHelper.Windows
         }
 
         // -----------------------------------------------------------------------
-        // Nav Mapping: button name -> panel name
+        // Nav Mapping: button name, panel name
         // -----------------------------------------------------------------------
 
         private static readonly IReadOnlyDictionary<string, string> NavMap =

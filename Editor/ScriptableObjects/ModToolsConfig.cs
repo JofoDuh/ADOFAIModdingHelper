@@ -14,24 +14,6 @@ namespace ADOFAIModdingHelper.ScriptableObjects
 {
     public class ModToolsConfig : ScriptableObject
     {
-        //private static ModToolsConfig _config;
-
-        //public static ModToolsConfig Config
-        //{
-        //    get
-        //    {
-        //        if (_config)
-        //            return _config;
-        //        _config = AssetDatabase.LoadAssetAtPath<ModToolsConfig>("Assets/Editor/Config.asset");
-        //        if (_config) return _config;
-
-        //        _config = CreateInstance<ModToolsConfig>();
-        //        AssetDatabase.CreateAsset(_config, "Assets/Editor/Config.asset");
-
-        //        return _config;
-        //    }
-        //}
-
         public string BuildDirectory;
 
         public bool openModInfoFoldout;

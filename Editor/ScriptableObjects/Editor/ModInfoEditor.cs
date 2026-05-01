@@ -1,4 +1,5 @@
-﻿using ADOFAIModdingHelper.Utilities;
+﻿//Original Code from https://github.com/ADOFAI-gg/ADOFAI-Modding-Toolkit
+using ADOFAIModdingHelper.Utilities;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;

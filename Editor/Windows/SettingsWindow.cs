@@ -124,6 +124,7 @@ namespace ADOFAIModdingHelper.Windows
 
             browseButton.clicked += () =>
             {
+                // Logic from from https://github.com/ADOFAI-gg/ADOFAI-Modding-Toolkit
                 string initialDirectory;
                 string extension;
 
@@ -155,6 +156,7 @@ namespace ADOFAIModdingHelper.Windows
 
             importButton.clicked += () =>
             {
+                // Logic from from https://github.com/ADOFAI-gg/ADOFAI-Modding-Toolkit
                 bool continueImporting = EditorUtility.DisplayDialog(
                     "Are you sure?",
                     "Importing the game assembly may take a while, and you will likely be asked to restart the Unity Editor.",
