@@ -1,4 +1,9 @@
-# ADOFAI Modding Helper
+# ADOFAI Modding Helper - Use Thunderkit
+
+## **This Branch is old and won't be updated anymore, please refer to the [Main Branch](https://github.com/JofoDuh/ADOFAIModdingHelper/) or the [MultiMods Branch](https://github.com/JofoDuh/ADOFAIModdingHelper/tree/MultiMods)**
+
+### **Feel free to use it if you wish**
+
 Unity package made for ADOFAI mod developers working alongside Thunderkit. This package streamlines some process in mod development. **Make sure to read the instructions to properly use this package!**
 
 The package "ADOFAI Runner" has also been merged with this package, so make sure to remove the "ADOFAI Runner" package before adding this.
