@@ -842,8 +842,7 @@ namespace ADOFAIModdingHelper.Windows
             var config = ModToolsConfig.Config;
             if (label == null) return;
 
-            string path = Path.Combine(Directory.GetCurrentDirectory(), "Builds",
-                ModInfo.Info.Id ?? $"{config.name}_{config.GetInstanceID()}");
+            string path = Path.Combine(Directory.GetCurrentDirectory(), "Builds");
 
             if (!Directory.Exists(path))
             {
