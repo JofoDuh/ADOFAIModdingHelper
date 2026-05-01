@@ -441,25 +441,23 @@ namespace ADOFAIModdingHelper.Windows
             _subPanel.Q<Button>(Names.BuildButton).clicked += () =>
             {
                 string modId = ModInfo.Info.Id;
-                if (string.IsNullOrWhiteSpace(modId))
+                if (!string.IsNullOrWhiteSpace(modId))
                 {
-                    if (EditorUtility.DisplayDialog("Mod ID is Empty!",
-                        "The Mod ID is empty, which will create a folder of type \"config.name_instance\". Do you want to proceed?",
-                        "Yes",
-                        "Cancel"))
-                    {
-                        string folderName = !string.IsNullOrWhiteSpace(modId)
+                    string folderName = !string.IsNullOrWhiteSpace(modId)
                     ? modId
                     : $"{config.name}_{config.GetInstanceID()}";
 
-                        string dest = config.copyToDirectory
-                            ? Path.Combine(Path.GetDirectoryName(Setting.Config.ADOFAIPath)!, "Mods", folderName)
-                            : null;
+                    string dest = config.copyToDirectory
+                        ? Path.Combine(Path.GetDirectoryName(Setting.Config.ADOFAIPath)!, "Mods", folderName)
+                        : null;
 
-                        config.BuildMod(dest);
-                        return;
-                    }
-                }              
+                    config.BuildMod(dest);                   
+                }
+                else
+                {
+                    EditorUtility.DisplayDialog("Mod ID is Empty!",
+                        "The Mod ID is empty, which will create a folder of type \"config.name_instance\". Do you want to proceed?", "Ok");
+                }
             };
         }
 
