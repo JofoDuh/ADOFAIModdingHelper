@@ -133,7 +133,7 @@ namespace ADOFAIModdingHelper.Windows
             priority: Constants.ADOFAIModdingHelperMenuPriority - 2)]
         public static void OpenInfo()
         {
-            var window = GetWindow<ModConfigWindow>("Settings");
+            var window = GetWindow<ModConfigWindow>("Mod Config");
             window._optionsList?.SetSelection(1);
         }
 
@@ -141,7 +141,7 @@ namespace ADOFAIModdingHelper.Windows
             priority: Constants.ADOFAIModdingHelperMenuPriority - 2)]
         public static void OpenBuild()
         {         
-            var window = GetWindow<ModConfigWindow>("Settings");
+            var window = GetWindow<ModConfigWindow>("Mod Config");
             window._optionsList?.SetSelection(Setting.Config.SeperateBuildTabs ? 2 : 1);
         }
 
@@ -149,7 +149,7 @@ namespace ADOFAIModdingHelper.Windows
             priority: Constants.ADOFAIModdingHelperMenuPriority - 2)]
         public static void ShowSetting()
         {
-            GetWindow<ModConfigWindow>("Settings");
+            GetWindow<ModConfigWindow>("Mod Config");
         }
 
         // -----------------------------------------------------------------------
@@ -284,6 +284,7 @@ namespace ADOFAIModdingHelper.Windows
 
             browseButton.clicked += () =>
             {
+                // Logic from from https://github.com/ADOFAI-gg/ADOFAI-Modding-Toolkit
                 string initialDirectory;
                 string extension;
 
@@ -315,6 +316,7 @@ namespace ADOFAIModdingHelper.Windows
 
             importButton.clicked += () =>
             {
+                // Logic from from https://github.com/ADOFAI-gg/ADOFAI-Modding-Toolkit
                 bool continueImporting = EditorUtility.DisplayDialog(
                     "Are you sure?",
                     "Importing the game assembly may take a while, and you will likely be asked to restart the Unity Editor.",
